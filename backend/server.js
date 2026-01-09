@@ -407,5 +407,75 @@ app.get("/support/history/:email", async (req, res) => {
   }
 });
 
+/* ================= CART ================= */
+
+// GET CART ITEMS
+app.get("/cart/:email", async (req, res) => {
+  try {
+    const cartItems = await Cart.find({ userEmail: req.params.email });
+    res.json(cartItems);
+  } catch (err) {
+    res.status(500).json({ message: "Failed to fetch cart items" });
+  }
+});
+
+// ADD TO CART / UPDATE QUANTITY
+app.post("/cart", async (req, res) => {
+  try {
+    const { userEmail, productId, name, price, img, qty } = req.body;
+    
+    let cartItem = await Cart.findOne({ userEmail, productId });
+    
+    if (cartItem) {
+      cartItem.qty += qty;
+      cartItem.price = cartItem.qty * cartItem.unitPrice;
+      await cartItem.save();
+    } else {
+      cartItem = await Cart.create({
+        userEmail,
+        productId,
+        name,
+        unitPrice: price,
+        price: price * qty,
+        img,
+        qty
+      });
+    }
+    res.json(cartItem);
+  } catch (err) {
+    res.status(500).json({ message: "Failed to sync cart" });
+  }
+});
+
+// REMOVE FROM CART
+app.delete("/cart/:email/:productId", async (req, res) => {
+  try {
+    const { email, productId } = req.params;
+    await Cart.findOneAndDelete({ userEmail: email, productId });
+    res.json({ message: "Item removed from cart" });
+  } catch (err) {
+    res.status(500).json({ message: "Failed to remove item" });
+  }
+});
+
+// UPDATE QTY DIRECTLY
+app.post("/cart/update-qty", async (req, res) => {
+  try {
+    const { userEmail, productId, qty } = req.body;
+    const cartItem = await Cart.findOne({ userEmail, productId });
+    
+    if (cartItem) {
+      cartItem.qty = qty;
+      cartItem.price = cartItem.qty * cartItem.unitPrice;
+      await cartItem.save();
+      res.json(cartItem);
+    } else {
+      res.status(404).json({ message: "Cart item not found" });
+    }
+  } catch (err) {
+    res.status(500).json({ message: "Failed to update quantity" });
+  }
+});
+
 /* ================= SERVER ================= */
 
