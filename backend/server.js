@@ -250,6 +250,7 @@ app.post("/login", async (req, res) => {
     { expiresIn: "1d" }
   );
 
+
   res.json({
     token,
     user: {
@@ -259,6 +260,32 @@ app.post("/login", async (req, res) => {
       isAdmin: user.isAdmin,
     },
   });
+});
+
+// ADD ADDRESS
+app.post("/user/address", async (req, res) => {
+  try {
+    const { email, label, address } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    user.addresses.push({ label, address, isDefault: false });
+    await user.save();
+
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ message: "Failed to add address" });
+  }
+});
+
+// GET USER INFO (FOR PROFILE RELOAD)
+app.get("/user/:email", async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.params.email });
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ message: "Failed to fetch user" });
+  }
 });
 
 /* ================= ADMIN ================= */
@@ -437,6 +464,40 @@ app.get("/support/history/:email", async (req, res) => {
     res.json(history);
   } catch (err) {
     res.status(500).json({ message: "Failed to fetch history" });
+  }
+});
+
+/* ================= REVIEWS ================= */
+
+// SUBMIT REVIEW
+app.post("/reviews", upload.none(), async (req, res) => {
+  try {
+    const { productId, userEmail, userName, rating, comment } = req.body;
+
+    // 1. Create Review
+    const newReview = await Review.create({
+      productId,
+      userEmail,
+      userName,
+      rating: Number(rating),
+      comment,
+      images: [], // No images in this flow yet
+    });
+
+    // 2. Update Product Ratings
+    const allReviews = await Review.find({ productId });
+    const totalRating = allReviews.reduce((sum, rev) => sum + rev.rating, 0);
+    const averageRating = totalRating / allReviews.length;
+
+    await Product.findByIdAndUpdate(productId, {
+      averageRating: averageRating.toFixed(1),
+      ratingCount: allReviews.length,
+    });
+
+    res.json(newReview);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Failed to submit review" });
   }
 });
 
