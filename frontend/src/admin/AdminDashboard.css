@@ -1,7 +1,7 @@
 /* full page */
 .admin-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f3e8ff, #ede9fe);
+  background: linear-gradient(135deg, #F1F8E9, #E8F5E9);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,7 +15,7 @@
   background: #ffffff;
   border-radius: 16px;
   padding: 30px;
-  box-shadow: 0 20px 40px rgba(139, 61, 255, 0.15);
+  box-shadow: 0 20px 40px rgba(46, 125, 50, 0.15);
 }
 
 /* title */
@@ -29,7 +29,7 @@
 
 .admin-title {
   font-size: 28px;
-  color: #6d28d9;
+  color: var(--primary-dark);
   margin: 0;
 }
 
@@ -62,7 +62,7 @@
 }
 
 .admin-actions button {
-  background: #8b3dff;
+  background: var(--primary-color);
   color: white;
   border: none;
   padding: 12px 22px;
@@ -73,7 +73,7 @@
 }
 
 .admin-actions button:hover {
-  background: #6d28d9;
+  background: var(--primary-dark);
   transform: translateY(-2px);
 }
 

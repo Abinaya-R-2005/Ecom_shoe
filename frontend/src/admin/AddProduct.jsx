@@ -11,6 +11,7 @@ const AddProduct = () => {
     description: "",
   });
   const [image, setImage] = useState(null);
+  const [galleryImages, setGalleryImages] = useState([]); // ✅ New state
 
   const adminEmail = "admin@gmail.com";
   const navigate = useNavigate();
@@ -30,13 +31,28 @@ const AddProduct = () => {
     formData.append("email", adminEmail);
     formData.append("image", image); // 🔥 IMPORTANT
 
+    // Append Gallery Images
+    for (let i = 0; i < galleryImages.length; i++) {
+      formData.append("galleryImages", galleryImages[i]);
+    }
+
+    const token = localStorage.getItem("token");
+
     const res = await fetch("http://localhost:5000/admin/product", {
       method: "POST",
-      body: formData, // ❌ NO headers
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+      body: formData,
     });
 
-    const data = await res.json();
-    alert(data.message);
+    if (res.ok) {
+      alert("Product Added Successfully!");
+      navigate(-1);
+    } else {
+      const data = await res.json();
+      alert(data.message || "Failed to add product");
+    }
   };
 
   return (
@@ -77,6 +93,15 @@ const AddProduct = () => {
           type="file"
           accept="image/*"
           onChange={(e) => setImage(e.target.files[0])}
+        />
+
+        {/* Gallery Images Upload */}
+        <label className="upload-label">Upload Additional Images (Gallery)</label>
+        <input
+          type="file"
+          accept="image/*"
+          multiple
+          onChange={(e) => setGalleryImages(e.target.files)}
         />
 
         <textarea

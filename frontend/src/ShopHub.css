@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
 
 :root {
-  --primary: #7c3aed; /* Exact Figma Purple */
+  --primary: #2E7D32;
+  /* Green */
   --primary-hover: #6d28d9;
   --bg-light: #f8fafc;
   --text-dark: #1e293b;
@@ -10,10 +11,23 @@
   --border: #e2e8f0;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Inter', sans-serif; background: var(--bg-light); color: var(--text-dark); }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-.container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg-light);
+  color: var(--text-dark);
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
 
 /* Global Button Styles */
 .btn-primary {
@@ -26,6 +40,7 @@ body { font-family: 'Inter', sans-serif; background: var(--bg-light); color: var
   border: none;
   cursor: pointer;
 }
+
 .btn-primary:hover {
   background: var(--primary-hover);
   transform: translateY(-2px);

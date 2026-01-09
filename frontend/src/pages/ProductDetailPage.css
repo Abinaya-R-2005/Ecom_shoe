@@ -16,31 +16,33 @@
   padding: 12px 24px;
   border-radius: 50x;
   font-weight: 600;
-  letter-spacing:0.3px;
+  letter-spacing: 0.3px;
   font-size: 0.9rem;
   color: blue;
   cursor: pointer;
   position: relative;
-  overflow:hidden;
-  /*🔽THISfixestheinwardlook*/margin-top: 20px;
+  overflow: hidden;
+  /*🔽THISfixestheinwardlook*/
+  margin-top: 20px;
   margin-bottom: 25px;
   width: fit-content;
-  transition:     transform 0.4s ease,    box-shadow 0.25s ease,    background 0.25s ease,    color 0.25s ease,    border-color 0.25s ease;
+  transition: transform 0.4s ease, box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
   -webkit-border-radius: 50x;
   -moz-border-radius: 50x;
   -ms-border-radius: 50x;
   -o-border-radius: 50x;
-  -webkit-transition:     transform 0.4s ease,    box-shadow 0.25s ease,    background 0.25s ease,    color 0.25s ease,    border-color 0.25s ease;
-  -moz-transition:     transform 0.4s ease,    box-shadow 0.25s ease,    background 0.25s ease,    color 0.25s ease,    border-color 0.25s ease;
-  -ms-transition:     transform 0.4s ease,    box-shadow 0.25s ease,    background 0.25s ease,    color 0.25s ease,    border-color 0.25s ease;
-  -o-transition:     transform 0.4s ease,    box-shadow 0.25s ease,    background 0.25s ease,    color 0.25s ease,    border-color 0.25s ease;
+  -webkit-transition: transform 0.4s ease, box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  -moz-transition: transform 0.4s ease, box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  -ms-transition: transform 0.4s ease, box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  -o-transition: transform 0.4s ease, box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
 }
 
 
 .back-btn:hover {
   background: #ffffff;
-  /*softpurpletint*/color: #4f46e5;
+  /*softpurpletint*/
+  color: #4f46e5;
   border-color: #4f46e5;
   transform: translateY(-3px);
   box-shadow: 0 10px 20px rgba(79, 70, 229, 0.12);
@@ -59,10 +61,12 @@
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
+
 .back-btn:active {
   transform: translateY(0);
   box-shadow: 0 6px 14px rgba(79, 70, 229, 0.08);
 }
+
 @media (max-width: 900px) {
   .detail-grid {
     grid-template-columns: 1fr;
@@ -83,10 +87,11 @@
   }
 }
 
+/* Generic image style in this section - be careful not to conflict */
 .product-image-section img {
-  width: 100%;
   border-radius: 8px;
-  object-fit: cover;
+  /* width: 100%;  <-- Removing this global width to avoid squashing thumbnails if they don't have explicit width (though they do). */
+  /* object-fit: cover; <-- Removing global object-fit to allow specific classes to control it */
 }
 
 .detail-tag {
@@ -460,4 +465,108 @@
   .reviews-layout {
     grid-template-columns: 1fr;
   }
+}
+
+/* Gallery Styles */
+/* Main Image Container */
+.main-image-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 500px;
+  /* Fixed height for consistency */
+  background-color: #f9f9f9;
+  /* Subtle background for transparency */
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+/* Ensure Main Image Fits Properly */
+.main-detail-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* Prevents cropping */
+  transition: transform 0.3s ease;
+}
+
+.main-detail-img:hover {
+  transform: scale(1.02);
+}
+
+/* Navigation Buttons */
+/* Navigation Buttons */
+/* Navigation Buttons (Minimalist) */
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent !important;
+  /* Force transparent */
+  border: none;
+  color: #000;
+  font-size: 24px;
+  cursor: pointer;
+  width: 40px;
+  /* Fixed small width */
+  height: 40px;
+  /* Fixed small height */
+  border-radius: 50%;
+  padding: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+  box-shadow: none;
+}
+
+.nav-btn:hover {
+  background: transparent !important;
+  color: #333;
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* Position strictly at edges */
+.prev-btn {
+  left: 10px;
+}
+
+.next-btn {
+  right: 10px;
+}
+
+/* Thumbnail Gallery */
+.thumbnail-gallery {
+  display: flex;
+  gap: 12px;
+  margin-top: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.thumb-img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.2s ease;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.thumb-img:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.active-thumb {
+  border-color: #2E7D32;
+  /* Primary Green */
+  box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.2);
 }

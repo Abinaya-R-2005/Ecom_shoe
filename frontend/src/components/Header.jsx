@@ -59,7 +59,9 @@ const Header = ({ onSearch }) => {
 
       {/* Main Nav */}
       <div className="main-nav container">
-        <Link to="/home" className="logo-brand">ShopHub</Link>
+        <Link to="/home" className="logo-brand">
+          <img src="/mom_logo.jpg" alt="MOM SECRET HAIR OIL" className="header-logo-img" />
+        </Link>
 
         {/* Search Bar - Moved outside nav-content for mobile visibility */}
         <div className="search-bar">

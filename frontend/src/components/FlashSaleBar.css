@@ -1,6 +1,6 @@
 /* src/components/FlashSaleBar.css */
 .flash-sale-bar {
-    background: #f97316;
+    background: var(--primary-color);
     /* Orange-500 */
     color: white;
     font-size: 12px;

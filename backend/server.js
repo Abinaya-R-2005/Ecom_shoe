@@ -51,6 +51,7 @@ const productSchema = new mongoose.Schema({
   price: Number,
   description: String,
   image: String,
+  images: [String], // ✅ Added for gallery
   averageRating: { type: Number, default: 0 },
   ratingCount: { type: Number, default: 0 },
 });
@@ -273,10 +274,14 @@ app.get("/categories", async (req, res) => {
 });
 
 // PRODUCT
-app.post("/admin/product", verifyAdmin, upload.single("image"), async (req, res) => {
+app.post("/admin/product", verifyAdmin, upload.fields([{ name: 'image', maxCount: 1 }, { name: 'galleryImages', maxCount: 5 }]), async (req, res) => {
+  const mainImage = req.files['image'] ? `/uploads/${req.files['image'][0].filename}` : "";
+  const galleryImages = req.files['galleryImages'] ? req.files['galleryImages'].map(f => `/uploads/${f.filename}`) : [];
+
   const product = await Product.create({
     ...req.body,
-    image: req.file ? `/uploads/${req.file.filename}` : "",
+    image: mainImage,
+    images: galleryImages
   });
   res.json(product);
 });

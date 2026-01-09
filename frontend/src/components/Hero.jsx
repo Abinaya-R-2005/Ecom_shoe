@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { FaArrowRight } from "react-icons/fa";
-import fashionHero from "../assets/hero_fashion_white-removebg-preview.png";
-import heroMens from "../assets/hero_mens_white-removebg-preview.png";
-import heroKids from "../assets/hero_kids_white-removebg-preview.png";
-import heroShoes from "../assets/hero_shoes_white-removebg-preview.png";
-import heroWatch from "../assets/hero_watch_white-removebg-preview.png";
+import img1 from "../assets/Herbal Oil.png";
+import img2 from "../assets/Activated Charcoal Cow Milk Soap.png";
+import img3 from "../assets/Saffron Goat Milk Soap.png";
+import img4 from "../assets/Kuppameni Fase Wash.png";
+import img5 from "../assets/Pure Cow Ghee.png";
 import "./hero.css";
 
 const slides = [
-  { id: 1, img: fashionHero, title: "Perfect Style", subtitle: "New Trends", discount: "Up to 50% OFF" },
-  { id: 2, img: heroMens, title: "Urban Streetwear", subtitle: "Cool & Casual", discount: "New Arrivals" },
-  { id: 3, img: heroKids, title: "Kids Collection", subtitle: "Playful Styles", discount: "Flat 20% OFF" },
-  { id: 4, img: heroShoes, title: "Premium Footwear", subtitle: "Run in Style", discount: "Best Sellers" },
-  { id: 5, img: heroWatch, title: "Luxury Timepieces", subtitle: "Classic Elegance", discount: "Exclusive Deals" }
+  { id: 1, img: img1, title: "Herbal Hair Oil", subtitle: "Secret to Long Hair", discount: "100% Organic" },
+  { id: 2, img: img2, title: "Charcoal Soap", subtitle: "Deep Cleansing", discount: "Natural Detox" },
+  { id: 3, img: img3, title: "Saffron Goat Milk Soap", subtitle: "Skin Brightening", discount: "Gentle Care" },
+  { id: 4, img: img4, title: "Kuppameni Wash", subtitle: "Acne Free Skin", discount: "Herbal Formula" },
+  { id: 5, img: img5, title: "Pure Cow Ghee", subtitle: "Traditional Taste", discount: "Farm Fresh" }
 ];
 
 function Hero() {

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import { FaStar, FaShoppingCart, FaArrowLeft } from "react-icons/fa";
+
 import { useCart } from "../context/CartContext";
 import "./ProductDetailPage.css";
 
@@ -12,6 +13,8 @@ const ProductDetailPage = () => {
 
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [currentImage, setCurrentImage] = useState("");
+  const [allImages, setAllImages] = useState([]);
 
   // Fetch product from API
   useEffect(() => {
@@ -22,6 +25,10 @@ const ProductDetailPage = () => {
       })
       .then((data) => {
         setProduct(data);
+        // Combine main image and gallery images
+        const images = [data.image, ...(data.images || [])].filter(Boolean);
+        setAllImages(images);
+        setCurrentImage(data.image);
         setLoading(false);
       })
       .catch((err) => {
@@ -139,11 +146,28 @@ const ProductDetailPage = () => {
 
         <div className="detail-grid">
           <div className="product-image-section">
-            <img
-              src={`http://localhost:5000${product.image}` || "https://via.placeholder.com/600"}
-              alt={product.name}
-              className="main-detail-img"
-            />
+            <div className="main-image-container">
+              <img
+                src={`http://localhost:5000${currentImage}` || "https://via.placeholder.com/600"}
+                alt={product.name}
+                className="main-detail-img"
+              />
+            </div>
+
+            {/* Thumbnail Gallery */}
+            {allImages.length > 1 && (
+              <div className="thumbnail-gallery">
+                {allImages.map((img, i) => (
+                  <img
+                    key={i}
+                    src={`http://localhost:5000${img}`}
+                    alt={`thumb-${i}`}
+                    className={`thumb-img ${currentImage === img ? "active-thumb" : ""}`}
+                    onClick={() => setCurrentImage(img)}
+                  />
+                ))}
+              </div>
+            )}
           </div>
 
           <div className="product-info-section">

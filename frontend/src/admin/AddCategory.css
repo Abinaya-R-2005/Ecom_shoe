@@ -3,9 +3,10 @@
   max-width: 800px;
   margin: 40px auto;
   padding: 30px;
-  background: #f5f3ff; /* light violet */
+  background: #F1F8E9;
+  /* light green */
   border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(139, 61, 255, 0.15);
+  box-shadow: 0 10px 30px rgba(46, 125, 50, 0.15);
   font-family: "Poppins", sans-serif;
 }
 
@@ -15,7 +16,7 @@
   border: none;
   font-size: 16px;
   font-weight: 600;
-  color: #6d28d9;
+  color: var(--primary-color);
   cursor: pointer;
   margin-bottom: 20px;
 }
@@ -27,7 +28,7 @@
 /* Main title */
 .add-category-page h2 {
   text-align: center;
-  color: #4c1d95;
+  color: var(--primary-dark);
   margin-bottom: 25px;
 }
 
@@ -49,13 +50,13 @@
 }
 
 .category-form input:focus {
-  border-color: #8b5cf6;
-  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.2);
 }
 
 /* Add / Update button */
 .category-form button {
-  background: #8b5cf6;
+  background: var(--primary-color);
   color: white;
   border: none;
   padding: 12px 20px;
@@ -65,13 +66,13 @@
 }
 
 .category-form button:hover {
-  background: #7c3aed;
+  background: var(--primary-dark);
 }
 
 /* List title */
 .list-title {
   margin-bottom: 15px;
-  color: #4c1d95;
+  color: var(--primary-dark);
 }
 
 /* Category list */

@@ -10,7 +10,8 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Keeps the empty card centered */
+  align-items: center;
+  /* Keeps the empty card centered */
   padding: 0 20px 40px 20px;
 }
 
@@ -19,7 +20,8 @@
   width: 100%;
   display: flex;
   justify-content: flex-start;
-  margin-top: 40px; /* Pushes button below the "All Categories" bar */
+  margin-top: 40px;
+  /* Pushes button below the "All Categories" bar */
 }
 
 /* --- THE MODERN BUTTON STYLE --- */
@@ -30,8 +32,9 @@
   background: #ffffff;
   border: 1px solid #e2e8f0;
   padding: 10px 22px;
-  border-radius: 999px; /* Pill shape */
-  
+  border-radius: 999px;
+  /* Pill shape */
+
   margin-bottom: 25px;
 
   font-weight: 600;
@@ -39,17 +42,19 @@
   color: #64748b;
   cursor: pointer;
   text-decoration: none;
-  
+
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .classic-browse-btn:hover {
   background: #ffffff;
-  color: #7c3aed; /* Brand Purple */
-  border-color: #7c3aed;
-  transform: translateX(-5px); /* Slide left on hover */
-  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.12);
+  color: var(--primary-color);
+  /* Brand Green */
+  border-color: var(--primary-color);
+  transform: translateX(-5px);
+  /* Slide left on hover */
+  box-shadow: 0 4px 12px rgba(46, 125, 50, 0.12);
 }
 
 .classic-browse-btn:active {
@@ -87,8 +92,15 @@
 }
 
 @keyframes heartPulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.15); }
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.15);
+  }
 }
 
 .empty-title {
@@ -115,13 +127,21 @@
 }
 
 .page-title span {
-  color: #7c3aed;
+  color: var(--primary-color);
   font-weight: 400;
 }
 
 /* Mobile Adjustments */
 @media (max-width: 600px) {
-  .empty-wishlist-card { padding: 30px 20px; }
-  .empty-title { font-size: 24px; }
-  .back-btn-container { margin-top: 20px; }
+  .empty-wishlist-card {
+    padding: 30px 20px;
+  }
+
+  .empty-title {
+    font-size: 24px;
+  }
+
+  .back-btn-container {
+    margin-top: 20px;
+  }
 }

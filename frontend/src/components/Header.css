@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --primary-color: #8b5cf6;
-  /* Light Purple/Violet */
-  --primary-dark: #7c3aed;
-  /* Deep Purple */
-  --accent-color: #fca5a5;
-  /* Soft Red/Pink for badges */
+  --primary-color: #2E7D32;
+  /* Forest Green */
+  --primary-dark: #1B5E20;
+  /* Dark Green */
+  --accent-color: #66BB6A;
+  /* Light Green */
   --text-dark: #1f2937;
   --text-light: #6b7280;
   --bg-light: #f3f4f6;
@@ -86,20 +86,30 @@
 
 /* Logo */
 .logo-brand {
-  font-size: 28px;
-  font-weight: 800;
-  color: var(--white);
-  background: var(--primary-dark);
-  padding: 3px 9px;
-  border-radius: 8px;
+  display: flex;
+  align-items: center;
   text-decoration: none;
-  letter-spacing: -0.5px;
-  box-shadow: 0 4px 6px -1px rgba(124, 58, 237, 0.3);
-  transition: transform 0.2s;
+  background: transparent;
+  padding: 0;
+  box-shadow: none;
+}
+
+.header-logo-img {
+  max-height: 55px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid white;
+}
+
+.logo-brand:hover .header-logo-img {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(46, 125, 50, 0.15);
+  border-color: var(--primary-color);
 }
 
 .logo-brand:hover {
-  transform: translateY(-2px);
+  transform: none;
 }
 
 /* Search Bar */
