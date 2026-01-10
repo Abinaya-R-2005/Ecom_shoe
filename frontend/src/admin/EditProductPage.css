@@ -5,7 +5,21 @@
     padding: 30px;
     border-radius: 10px;
   }
+  .back-btn {
+    background: none;
+    border: none;
+    color: #2e7d32;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 15px;
+  }
   
+  .back-btn:hover {
+    text-decoration: underline;
+  }
+  .heading{
+    text-align: center;
+  }
   .edit-form {
     display: flex;
     flex-direction: column;
@@ -34,5 +48,11 @@
     border: none;
     font-size: 16px;
     cursor: pointer;
+  }
+  .edit-form select {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
   }
   

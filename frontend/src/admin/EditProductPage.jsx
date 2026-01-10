@@ -5,6 +5,8 @@ import "./EditProductPage.css";
 const EditProductPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [categories, setCategories] = useState([]);
+
   const location = useLocation();
   const isDiscountTab = new URLSearchParams(location.search).get("tab") === "discount";
 
@@ -19,7 +21,13 @@ const EditProductPage = () => {
     discountStart: "",
     discountEnd: "",
   });
-
+  useEffect(() => {
+    fetch("http://localhost:5000/categories")
+      .then(res => res.json())
+      .then(data => setCategories(data))
+      .catch(err => console.error("Failed to fetch categories", err));
+  }, []);
+  
   useEffect(() => {
     fetch(`http://localhost:5000/products/${id}`)
       .then(res => res.json())
@@ -67,56 +75,114 @@ const EditProductPage = () => {
       navigate("/admin/remove-product");
     }
   };
+  const discountedPrice =
+  form.price && form.discountPercent
+    ? (
+        form.price -
+        (form.price * form.discountPercent) / 100
+      ).toFixed(2)
+    : "";
 
   return (
     <div className="edit-container">
-      <h2>{isDiscountTab ? "Manage Discount" : "Edit Product"}</h2>
+        <h1 className ="heading">{isDiscountTab ? "Manage Discount" : "Edit Product"}</h1>
+        <button     className="back-btn"    onClick={() => navigate(-1)}> ← Back </button>
+
+      
 
       <form className="edit-form" onSubmit={handleSubmit}>
+      {!isDiscountTab && (
+  <>
+    <label>Product Name</label>
+    <input
+      name="name"
+      value={form.name}
+      onChange={handleChange}
+      required
+    />
 
-        {!isDiscountTab && (
-          <>
-            <label>Product Name</label>
-            <input name="name" value={form.name} onChange={handleChange} />
+    <label>Category</label>
+    <select
+      name="category"
+      value={form.category}
+      onChange={handleChange}
+      required
+    >
+      <option value="">Select Category</option>
+      {categories.map((cat) => (
+        <option key={cat._id} value={cat.name}>
+          {cat.name}
+        </option>
+      ))}
+    </select>
 
-            <label>Category</label>
-            <input name="category" value={form.category} onChange={handleChange} />
+    <label>Price</label>
+    <input
+      type="number"
+      name="price"
+      value={form.price}
+      onChange={handleChange}
+      required
+    />
 
-            <label>Price</label>
-            <input type="number" name="price" value={form.price} onChange={handleChange} />
+    <label>Description</label>
+    <textarea
+      name="description"
+      value={form.description}
+      onChange={handleChange}
+    />
+  </>
+)}
 
-            <label>Description</label>
-            <textarea name="description" value={form.description} onChange={handleChange} />
-          </>
-        )}
+{isDiscountTab && (
+  <>
+    {/* Original Price */}
+    <label>Original Price</label>
+    <input
+      type="number"
+      value={form.price}
+      disabled
+    />
 
-        {isDiscountTab && (
-          <>
-            <label>Discount Percentage</label>
-            <input
-              type="number"
-              name="discountPercent"
-              value={form.discountPercent}
-              onChange={handleChange}
-            />
+    {/* Discount Percentage */}
+    <label>Discount Percentage (%)</label>
+    <input
+      type="number"
+      name="discountPercent"
+      value={form.discountPercent}
+      onChange={handleChange}
+      min="0"
+      max="100"
+    />
 
-            <label>Discount Start</label>
-            <input
-              type="datetime-local"
-              name="discountStart"
-              value={form.discountStart}
-              onChange={handleChange}
-            />
+    {/* Discounted Price */}
+    <label>Discounted Price</label>
+    <input
+      type="number"
+      value={discountedPrice}
+      disabled
+    />
 
-            <label>Discount End</label>
-            <input
-              type="datetime-local"
-              name="discountEnd"
-              value={form.discountEnd}
-              onChange={handleChange}
-            />
-          </>
-        )}
+    {/* Discount Start */}
+    <label>Discount Start</label>
+    <input
+      type="datetime-local"
+      name="discountStart"
+      value={form.discountStart}
+      onChange={handleChange}
+    />
+
+    {/* Discount End */}
+    <label>Discount End</label>
+    <input
+      type="datetime-local"
+      name="discountEnd"
+      value={form.discountEnd}
+      onChange={handleChange}
+    />
+  </>
+)}
+
 
         <button type="submit" className="save-btn">Save</button>
       </form>
