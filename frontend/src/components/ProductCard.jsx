@@ -35,6 +35,19 @@ const ProductCard = ({ product }) => {
       }
     }, 1500);
   };
+  const now = new Date();
+
+const discountActive =
+  product.discountPercent > 0 &&
+  product.discountStart &&
+  product.discountEnd &&
+  now >= new Date(product.discountStart) &&
+  now <= new Date(product.discountEnd);
+
+const discountedPrice = discountActive
+  ? Math.round(product.price - (product.price * product.discountPercent) / 100)
+  : product.price;
+
 
   return (
     <div className="card">
@@ -64,7 +77,17 @@ const ProductCard = ({ product }) => {
           </div>
           <span style={{ fontSize: '0.8rem', color: '#666' }}>({product.ratingCount || 0})</span>
         </div>
-        <p>₹{product.price}</p>
+        <div className="price-box">
+  {discountActive ? (
+    <>
+      <span className="original-price">₹{product.price}</span>
+      <span className="discounted-price">₹{discountedPrice}</span>
+    </>
+  ) : (
+    <span className="normal-price">₹{product.price} </span>
+  )}
+</div>
+
         <button className="add-cart-full" onClick={handleAddToCart}>
           <FaShoppingCart /> {isWishlisted && location.pathname === "/wishlist" ? "Move to Cart" : "Add to Cart"}
         </button>

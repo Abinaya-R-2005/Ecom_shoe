@@ -148,3 +148,41 @@
     color: #9ca3af;
     padding: 40px;
 }
+.rp-actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .rp-edit-btn {
+    background: #2ecc71;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .rp-discount-btn {
+    background: #27ae60;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .rp-delete-btn {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .rp-edit-btn:hover,
+  .rp-discount-btn:hover,
+  .rp-delete-btn:hover {
+    opacity: 0.9;
+  }
+  

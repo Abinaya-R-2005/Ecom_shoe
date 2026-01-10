@@ -6,6 +6,18 @@
 .detail-container {
   margin-top: 30px;
 }
+.old-price {
+  text-decoration: line-through;
+  color: gray;
+  margin-right: 10px;
+}
+
+.off-text {
+  margin-left: 8px;
+  font-size: 14px;
+  color: #16a34a; /* green */
+  font-weight: 600;
+}
 
 .back-btn {
   display: flex;

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Trash2, ArrowLeft, Search } from "lucide-react";
+import { Trash2, ArrowLeft, Search, Edit } from "lucide-react";
+
 import "./RemoveProductPage.css";
 
 const RemoveProductPage = () => {
+    
     const navigate = useNavigate();
     const [products, setProducts] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
@@ -100,12 +102,32 @@ const RemoveProductPage = () => {
                                             <p>${product.price}</p>
                                         </div>
                                     </div>
-                                    <button
-                                        className="rp-delete-btn"
-                                        onClick={() => handleDelete(product._id)}
-                                    >
-                                        <Trash2 size={18} /> Remove
-                                    </button>
+                                    <div className="rp-actions">
+                                    <div className="rp-actions">
+  <button
+    className="rp-edit-btn"
+    onClick={() => navigate(`/admin/edit-product/${product._id}`)}
+  >
+    <Edit size={18} /> Edit
+  </button>
+
+  <button
+    className="rp-discount-btn"
+    onClick={() => navigate(`/admin/edit-product/${product._id}?tab=discount`)}
+  >
+    💸 Discount
+  </button>
+
+  <button
+    className="rp-delete-btn"
+    onClick={() => handleDelete(product._id)}
+  >
+    <Trash2 size={18} /> Delete
+  </button>
+</div>
+
+</div>
+
                                 </div>
                             ))
                         )}

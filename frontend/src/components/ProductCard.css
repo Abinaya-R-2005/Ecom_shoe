@@ -10,6 +10,20 @@
   flex-direction: column;
 }
 
+.original-price {
+  text-decoration: line-through;
+  color: #999;
+  margin-right: 8px;
+  font-size: 0.9rem;
+}
+
+.discounted-price {
+  color: #e60023;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+
 .card:hover {
   transform: translateY(-8px);
   border-color: rgba(46, 125, 50, 0.2);

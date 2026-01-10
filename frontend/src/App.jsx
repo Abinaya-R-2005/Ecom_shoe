@@ -3,6 +3,7 @@ import { WishlistProvider } from "./context/WishlistContext";
 import { CartProvider } from "./context/CartContext";
 
 import CategoryProducts from "./pages/CategoryProducts";
+import EditProductPage from "./admin/EditProductPage";
 
 import HomePage from "./pages/HomePage";
 import WishlistPage from "./pages/WishlistPage";
@@ -28,6 +29,7 @@ function App() {
           <Routes>
             {/* Auth Route */}
             <Route path="/" element={<AuthPage />} /> {/* Default to Login */}
+            <Route path="/admin/edit-product/:id" element={<EditProductPage />} />
 
             {/* Shop Routes */}
             <Route path="/home" element={<HomePage />} />
@@ -45,7 +47,7 @@ function App() {
             <Route path="/admin/add-category" element={<AddCategory />} />
             <Route path="/admin/add-product" element={<AddProduct />} />
             <Route path="/admin/remove-product" element={<RemoveProductPage />} />
-            <Route path="/admin/remove-product" element={<RemoveProductPage />} />
+            
             <Route path="/admin/orders" element={<AdminOrdersPage />} />
             <Route path="/admin/support" element={<AdminSupportPage />} />
 

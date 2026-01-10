@@ -51,10 +51,17 @@ const productSchema = new mongoose.Schema({
   price: Number,
   description: String,
   image: String,
-  images: [String], // ✅ Added for gallery
+  images: [String],
+
+  // ⭐ NEW: Discount fields
+  discountPercent: { type: Number, default: 0 },
+  discountStart: Date,
+  discountEnd: Date,
+
   averageRating: { type: Number, default: 0 },
   ratingCount: { type: Number, default: 0 },
 });
+
 const Product = mongoose.model("Product", productSchema);
 
 // ORDER
@@ -378,6 +385,41 @@ app.put("/admin/orders/:id", verifyAdmin, async (req, res) => {
   await Order.findByIdAndUpdate(req.params.id, { status: req.body.status });
   res.json({ message: "Status updated" });
 });
+// UPDATE PRODUCT (ADMIN)
+app.put(
+  "/admin/product/:id",
+  verifyAdmin,
+  upload.fields([
+    { name: "image", maxCount: 1 },
+    { name: "galleryImages", maxCount: 5 },
+  ]),
+  async (req, res) => {
+    try {
+      const updateData = { ...req.body };
+
+      if (req.files?.image) {
+        updateData.image = `/uploads/${req.files.image[0].filename}`;
+      }
+
+      if (req.files?.galleryImages) {
+        updateData.images = req.files.galleryImages.map(
+          (f) => `/uploads/${f.filename}`
+        );
+      }
+
+      const updatedProduct = await Product.findByIdAndUpdate(
+        req.params.id,
+        updateData,
+        { new: true }
+      );
+
+      res.json(updatedProduct);
+    } catch (err) {
+      res.status(500).json({ message: "Failed to update product" });
+    }
+  }
+);
+
 
 /* ================= USER ================= */
 

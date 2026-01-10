@@ -133,6 +133,20 @@ const ProductDetailPage = () => {
 
   if (loading) return <div className="container" style={{ marginTop: '100px' }}>Loading...</div>;
   if (!product) return <div className="container" style={{ marginTop: '100px' }}>Product not found</div>;
+  const now = new Date();
+
+  const isDiscountActive =
+    product.discountPercent > 0 &&
+    product.discountStart &&
+    product.discountEnd &&
+    now >= new Date(product.discountStart) &&
+    now <= new Date(product.discountEnd);
+  
+  const discountedPrice = isDiscountActive
+    ? (product.price * (1 - product.discountPercent / 100)).toFixed(2)
+    : product.price;
+  
+ 
 
   return (
     <div className="product-detail-page">
@@ -189,8 +203,22 @@ const ProductDetailPage = () => {
             </div>
 
             <div className="detail-price">
-              <span className="price">${product.price}</span>
-            </div>
+  {isDiscountActive ? (
+    <>
+      <span className="old-price">₹{product.price}</span>
+
+      <span className="price">
+        ₹{discountedPrice}
+        <span className="off-text">
+          {" "}({product.discountPercent}% OFF)
+        </span>
+      </span>
+    </>
+  ) : (
+    <span className="price">₹{product.price}</span>
+  )}
+</div>
+
 
             <p className="detail-description">
               {product.description || `Elevate your style with this premium quality ${product.name.toLowerCase()}.`}
