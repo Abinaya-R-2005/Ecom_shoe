@@ -51,7 +51,8 @@ export const CartProvider = ({ children }) => {
             name: product.name,
             price: product.price,
             img: product.image || product.img,
-            qty: 1
+            qty: 1,
+            variation: product.size // ✅ Syncing variation
           })
         });
       } catch (err) {

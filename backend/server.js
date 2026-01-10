@@ -72,6 +72,13 @@ const orderSchema = new mongoose.Schema({
   price: Number,
   userEmail: String,
   userName: String,
+  shippingAddress: Object, // ✅ Added shippingAddress
+  shippingMethod: String,  // ✅ Added shippingMethod
+  paymentMethod: String,   // ✅ Added paymentMethod
+  shippingCost: Number,    // ✅ Added shippingCost
+  tax: Number,             // ✅ Added tax
+  totalAmount: Number,     // ✅ Added totalAmount
+  variation: String,       // ✅ Added variation (weight)
   status: { type: String, default: "Ordered" },
   createdAt: { type: Date, default: Date.now },
 });
@@ -88,6 +95,7 @@ const cartSchema = new mongoose.Schema({
   price: Number,
   img: String,
   qty: { type: Number, default: 1 },
+  variation: String,      // ✅ Added variation (weight)
 });
 const Cart = mongoose.model("Cart", cartSchema);
 
@@ -518,8 +526,8 @@ app.post("/reviews", upload.array("images", 5), async (req, res) => {
     const { productId, userEmail, userName, rating, comment } = req.body;
 
     const imagePaths = req.files
-  ? req.files.map(file => `/uploads/${file.filename}`)
-  : [];
+      ? req.files.map(file => `/uploads/${file.filename}`)
+      : [];
     // 1. Create Review
     const newReview = await Review.create({
       productId,

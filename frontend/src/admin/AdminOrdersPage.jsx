@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Package, Clock } from "lucide-react";
+import { ArrowLeft, Package, Clock, Eye, X, MapPin, CreditCard, ShoppingBag } from "lucide-react";
 import "./AdminOrdersPage.css";
 
 const STATUS_OPTIONS = [
@@ -17,6 +17,7 @@ const AdminOrdersPage = () => {
   const [loading, setLoading] = useState(true);
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
+  const [selectedOrder, setSelectedOrder] = useState(null);
 
   // ✅ AUTH CHECK
   useEffect(() => {
@@ -134,6 +135,7 @@ const AdminOrdersPage = () => {
                     <th>Price</th>
                     <th>Date</th>
                     <th>Status</th>
+                    <th>Details</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -160,6 +162,11 @@ const AdminOrdersPage = () => {
                           ))}
                         </select>
                       </td>
+                      <td>
+                        <button className="details-btn" onClick={() => setSelectedOrder(o)}>
+                          <Eye size={16} />
+                        </button>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -167,8 +174,59 @@ const AdminOrdersPage = () => {
             </div>
           </>
         )}
-      </div>
-    </div>
+      </div >
+
+      {/* 🔍 ORDER DETAILS MODAL */}
+      {
+        selectedOrder && (
+          <div className="order-modal-overlay">
+            <div className="order-modal">
+              <div className="modal-header">
+                <h3>Order Details</h3>
+                <button onClick={() => setSelectedOrder(null)}><X size={20} /></button>
+              </div>
+
+              <div className="modal-content">
+                <div className="modal-section">
+                  <h4><MapPin size={16} /> Shipping Address</h4>
+                  <div className="address-box">
+                    <p><strong>Name:</strong> {selectedOrder.shippingAddress?.firstName} {selectedOrder.shippingAddress?.lastName}</p>
+                    <p><strong>Email:</strong> {selectedOrder.shippingAddress?.email}</p>
+                    <p><strong>Address:</strong> {selectedOrder.shippingAddress?.address}</p>
+                    <p><strong>Method:</strong> {selectedOrder.shippingMethod?.toUpperCase()}</p>
+                  </div>
+                </div>
+
+                <div className="modal-section">
+                  <h4><CreditCard size={16} /> Payment & Billing</h4>
+                  <div className="payment-box">
+                    <p><strong>Method:</strong> {selectedOrder.paymentMethod?.toUpperCase()}</p>
+                    <div className="price-breakdown">
+                      <div className="price-row"><span>Unit Price:</span> <span>₹{selectedOrder.price / selectedOrder.quantity}</span></div>
+                      <div className="price-row"><span>Quantity:</span> <span>x{selectedOrder.quantity}</span></div>
+                      <div className="price-row"><span>Product Total:</span> <span>₹{selectedOrder.price}</span></div>
+                      <div className="price-row"><span>Shipping:</span> <span>₹{selectedOrder.shippingCost || 0}</span></div>
+                      <div className="price-row"><span>Tax:</span> <span>₹{selectedOrder.tax?.toFixed(2) || '0.00'}</span></div>
+                      <hr />
+                      <div className="price-row total"><span>Order Total:</span> <span>₹{selectedOrder.totalAmount?.toFixed(2) || selectedOrder.price}</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="modal-section">
+                  <h4><ShoppingBag size={16} /> Product Info</h4>
+                  <div className="product-box">
+                    <p><strong>Item:</strong> {selectedOrder.productName}</p>
+                    <p><strong>ID:</strong> {selectedOrder.productId}</p>
+                    <p><strong>Order ID:</strong> {selectedOrder._id}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+      }
+    </div >
   );
 };
 

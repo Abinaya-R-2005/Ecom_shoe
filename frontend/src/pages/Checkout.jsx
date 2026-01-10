@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useCart } from "../context/CartContext";
-import { ChevronLeft, Lock } from 'lucide-react';
+import { ChevronLeft, Lock, FileText } from 'lucide-react';
 import { useNavigate } from "react-router-dom";
+import OrderReceipt from '../components/OrderReceipt';
 import './Checkout.css';
 
 const Checkout = () => {
@@ -12,6 +13,7 @@ const Checkout = () => {
   // State for selection logic
   const [selectedShipping, setSelectedShipping] = useState('standard');
   const [selectedPayment, setSelectedPayment] = useState('card');
+  const [showReceipt, setShowReceipt] = useState(false);
 
   // State for shipping information
   const [shippingInfo, setShippingInfo] = useState({
@@ -60,7 +62,10 @@ const Checkout = () => {
             shippingAddress: shippingInfo,
             shippingMethod: selectedShipping,
             paymentMethod: selectedPayment,
-            shippingCost: shippingCost
+            shippingCost: shippingCost,
+            tax: item.qty * (item.price * 0.08), // simplistic per-item tax
+            totalAmount: (item.price * item.qty) + (item.qty * (item.price * 0.08)) + (shippingCost / cart.length), // simplistic allocation
+            variation: item.variation || item.size // ✅ Syncing variation
           })
         })
       );
@@ -345,14 +350,39 @@ const Checkout = () => {
                 </div>
               </div>
 
-              <button className="place-order-btn" onClick={handlePlaceOrder}>
-                <Lock size={16} />
-                {selectedPayment === 'cod' ? 'Confirm Order' : 'Place Order'}
-              </button>
+              <div className="checkout-actions">
+                <button
+                  className="preview-slip-btn"
+                  onClick={() => setShowReceipt(true)}
+                  disabled={!shippingInfo.firstName || !shippingInfo.address}
+                >
+                  <FileText size={16} /> Preview Slip
+                </button>
+                <button className="place-order-btn" onClick={handlePlaceOrder}>
+                  <Lock size={16} />
+                  {selectedPayment === 'cod' ? 'Confirm Order' : 'Place Order'}
+                </button>
+              </div>
             </div>
           </aside>
         </div>
       </div>
+
+      {showReceipt && (
+        <OrderReceipt
+          order={{
+            shippingAddress: shippingInfo,
+            shippingMethod: selectedShipping,
+            paymentMethod: selectedPayment,
+            subtotal,
+            shippingCost,
+            tax,
+            totalAmount: total
+          }}
+          items={cart}
+          onClose={() => setShowReceipt(false)}
+        />
+      )}
     </div>
   );
 };

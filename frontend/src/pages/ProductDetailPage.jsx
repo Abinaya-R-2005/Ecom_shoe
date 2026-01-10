@@ -37,7 +37,7 @@ const ProductDetailPage = () => {
       });
   }, [id]);
 
-  const [selectedSize, setSelectedSize] = useState("M");
+  const [selectedSize, setSelectedSize] = useState("50g");
   const [quantity, setQuantity] = useState(1);
 
   // Review State
@@ -108,7 +108,7 @@ const ProductDetailPage = () => {
     }
   };
 
-  const sizes = ["S", "M", "L", "XL", "XXL"];
+  const sizes = ["50g", "100g", "250g", "500g"];
 
   const handleAddToCart = () => {
     if (product) {
@@ -141,12 +141,12 @@ const ProductDetailPage = () => {
     product.discountEnd &&
     now >= new Date(product.discountStart) &&
     now <= new Date(product.discountEnd);
-  
+
   const discountedPrice = isDiscountActive
     ? (product.price * (1 - product.discountPercent / 100)).toFixed(2)
     : product.price;
-  
- 
+
+
 
   return (
     <div className="product-detail-page">
@@ -203,21 +203,21 @@ const ProductDetailPage = () => {
             </div>
 
             <div className="detail-price">
-  {isDiscountActive ? (
-    <>
-      <span className="old-price">₹{product.price}</span>
+              {isDiscountActive ? (
+                <>
+                  <span className="old-price">₹{product.price}</span>
 
-      <span className="price">
-        ₹{discountedPrice}
-        <span className="off-text">
-          {" "}({product.discountPercent}% OFF)
-        </span>
-      </span>
-    </>
-  ) : (
-    <span className="price">₹{product.price}</span>
-  )}
-</div>
+                  <span className="price">
+                    ₹{discountedPrice}
+                    <span className="off-text">
+                      {" "}({product.discountPercent}% OFF)
+                    </span>
+                  </span>
+                </>
+              ) : (
+                <span className="price">₹{product.price}</span>
+              )}
+            </div>
 
 
             <p className="detail-description">
