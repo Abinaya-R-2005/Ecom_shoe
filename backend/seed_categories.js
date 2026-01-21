@@ -7,12 +7,13 @@ const categorySchema = new mongoose.Schema({
 const Category = mongoose.model("Category", categorySchema);
 
 const categories = [
-    { name: "Yoga" },
-    { name: "Compression" },
-    { name: "Fashion" },
-    { name: "Medical" },
-    { name: "Sports" },
-    { name: "Baby" }
+    { name: "Yoga Socks" },
+    { name: "Compression Sleeves" },
+    { name: "Thigh High Socks" },
+    { name: "Medical Stockings" },
+    { name: "Trampoline Socks" },
+    { name: "Ankle Grip Socks" },
+    { name: "Crawling Knee Pads" }
 ];
 
 mongoose

@@ -20,7 +20,7 @@ const Product = mongoose.model("Product", productSchema);
 const products = [
     {
         name: "Yoga Grip Socks",
-        category: "Yoga",
+        category: "Yoga Socks",
         price: 399,
         description: "Anti-slip yoga socks for better balance and stability.",
         image: "/uploads/sock1.jpg",
@@ -30,38 +30,37 @@ const products = [
     },
     {
         name: "Compression Sleeves",
-        category: "Compression",
+        category: "Compression Sleeves",
         price: 499,
         description: "Support your calves and reduce fatigue with compression sleeves.",
-        // Placeholder as I don't have the exact pink sleeve image, using closest or placeholder
         image: "/uploads/compression_sleeves_new.jpg",
-        images: ["/uploads/compression_sleeves_new.jpg"], // Reusing brown sock as placeholder or "Studio Sock"
+        images: ["/uploads/compression_sleeves_new.jpg"],
         features: ["Performance", "Recovery", "Circulation"],
         tag: "Best Seller"
     },
     {
         name: "Thigh High Socks",
-        category: "Fashion",
+        category: "Thigh High Socks",
         price: 599,
         description: "Stylish thigh-high socks for warmth and comfort.",
-        image: "/uploads/thigh_high_socks_full.jpg", // Reusing grey sock as placeholder
+        image: "/uploads/thigh_high_socks_full.jpg",
         images: ["/uploads/thigh_high_socks_full.jpg"],
         features: ["Style", "Warmth", "Soft"],
         tag: "New"
     },
     {
         name: "Medical Stockings",
-        category: "Medical",
+        category: "Medical Stockings",
         price: 699,
         description: "Medical grade compression stockings.",
-        image: "/uploads/sock5.jpg", // Using crew sock
+        image: "/uploads/sock5.jpg",
         images: ["/uploads/sock5.jpg"],
         features: ["Medical Grade", "Support", "Durable"],
         tag: "Professional"
     },
     {
         name: "Trampoline Socks",
-        category: "Sports",
+        category: "Trampoline Socks",
         price: 350,
         description: "High-grip trampoline socks for safety and fun.",
         image: "/uploads/trampoline_socks.jpg",
@@ -71,7 +70,7 @@ const products = [
     },
     {
         name: "Ankle Grip Socks",
-        category: "Yoga",
+        category: "Ankle Grip Socks",
         price: 450,
         description: "Low-cut ankle grip socks for pilates and barre.",
         image: "/uploads/ankle_grip_socks.jpg",
@@ -81,7 +80,7 @@ const products = [
     },
     {
         name: "Crawling Knee Pads",
-        category: "Baby",
+        category: "Crawling Knee Pads",
         price: 299,
         description: "Protective knee pads for crawling babies.",
         image: "/uploads/knee_pads.jpg",

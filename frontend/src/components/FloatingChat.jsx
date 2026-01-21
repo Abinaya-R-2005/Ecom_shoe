@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { MessageCircle, X, Send } from "lucide-react";
+import { FaCommentDots, FaTimes, FaPaperPlane } from "react-icons/fa";
 import "./FloatingChat.css";
 
 const FloatingChat = () => {
@@ -89,44 +89,44 @@ const FloatingChat = () => {
   };
 
   return (
-    <div className="floating-chat-container">
+    <div className="fc-floating-chat-container">
       {/* Chat Button */}
       <button
-        className="chat-toggle-btn"
+        className="fc-chat-toggle-btn"
         onClick={() => setIsOpen(!isOpen)}
         title="Open chat"
       >
-        {isOpen ? <X size={24} /> : <MessageCircle size={24} />}
+        {isOpen ? <FaTimes size={24} /> : <FaCommentDots size={24} />}
       </button>
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="chat-window">
+        <div className="fc-chat-window">
           {/* Header */}
-          <div className="chat-header">
+          <div className="fc-chat-header">
             <div>
               <h3>Chat with Support</h3>
               <p>We'll help you ASAP</p>
             </div>
-            <button onClick={() => setIsOpen(false)}>
-              <X size={20} />
+            <button onClick={() => setIsOpen(false)} title="Close Chat">
+              <FaTimes size={20} />
             </button>
           </div>
 
           {/* Messages */}
-          <div className="chat-messages">
+          <div className="fc-chat-messages">
             {messages.length === 0 ? (
-              <div className="chat-empty">
-                <MessageCircle size={40} />
+              <div className="fc-chat-empty">
+                <FaCommentDots size={40} />
                 <p>Start a conversation with our support team</p>
               </div>
             ) : (
               <>
                 {messages.map((msg, idx) => (
-                  <div key={msg.id || idx} className={`chat-message ${msg.sender}`}>
-                    <div className="message-content">
+                  <div key={msg.id || idx} className={`fc-chat-message ${msg.sender}`}>
+                    <div className="fc-message-content">
                       <p>{msg.text}</p>
-                      <span className="message-time">{msg.timestamp}</span>
+                      <span className="fc-message-time">{msg.timestamp}</span>
                     </div>
                   </div>
                 ))}
@@ -136,7 +136,7 @@ const FloatingChat = () => {
           </div>
 
           {/* Input */}
-          <form onSubmit={handleSendMessage} className="chat-form">
+          <form onSubmit={handleSendMessage} className="fc-chat-form">
             <input
               type="text"
               placeholder={user ? "Type your message..." : "Please login to chat"}
@@ -145,7 +145,7 @@ const FloatingChat = () => {
               disabled={!user || isLoading}
             />
             <button type="submit" disabled={!user || isLoading || !inputValue.trim()}>
-              <Send size={18} />
+              <FaPaperPlane size={18} />
             </button>
           </form>
         </div>

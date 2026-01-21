@@ -1,5 +1,5 @@
 /* Floating Chat Container */
-.floating-chat-container {
+.fc-floating-chat-container {
   position: fixed;
   bottom: 30px;
   right: 30px;
@@ -7,7 +7,7 @@
 }
 
 /* Chat Toggle Button */
-.chat-toggle-btn {
+.fc-chat-toggle-btn {
   width: 60px;
   height: 60px;
   background: #c71585;
@@ -23,18 +23,18 @@
   transition: all 0.3s ease;
 }
 
-.chat-toggle-btn:hover {
+.fc-chat-toggle-btn:hover {
   background: #a01366;
   transform: scale(1.1);
   box-shadow: 0 6px 25px rgba(199, 21, 133, 0.5);
 }
 
-.chat-toggle-btn:active {
+.fc-chat-toggle-btn:active {
   transform: scale(0.95);
 }
 
 /* Chat Window */
-.chat-window {
+.fc-chat-window {
   position: absolute;
   bottom: 80px;
   right: 0;
@@ -54,6 +54,7 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -61,7 +62,7 @@
 }
 
 /* Chat Header */
-.chat-header {
+.fc-chat-header {
   background: linear-gradient(135deg, #c71585, #e73c9c);
   color: white;
   padding: 20px;
@@ -71,19 +72,19 @@
   flex-shrink: 0;
 }
 
-.chat-header h3 {
+.fc-chat-header h3 {
   margin: 0;
   font-size: 18px;
   font-weight: 700;
 }
 
-.chat-header p {
+.fc-chat-header p {
   margin: 4px 0 0 0;
   font-size: 12px;
   opacity: 0.9;
 }
 
-.chat-header button {
+.fc-chat-header button {
   background: none;
   border: none;
   color: white;
@@ -94,7 +95,7 @@
 }
 
 /* Messages Container */
-.chat-messages {
+.fc-chat-messages {
   flex: 1;
   overflow-y: auto;
   padding: 16px;
@@ -104,7 +105,7 @@
   background: #f8f9fa;
 }
 
-.chat-empty {
+.fc-chat-empty {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -114,12 +115,12 @@
   gap: 12px;
 }
 
-.chat-empty svg {
+.fc-chat-empty svg {
   opacity: 0.5;
 }
 
 /* Chat Messages */
-.chat-message {
+.fc-chat-message {
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -131,21 +132,22 @@
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-.chat-message.user {
+.fc-chat-message.user {
   align-items: flex-end;
 }
 
-.chat-message.admin {
+.fc-chat-message.admin {
   align-items: flex-start;
 }
 
-.message-content {
+.fc-message-content {
   max-width: 85%;
   background: #c71585;
   color: white;
@@ -154,19 +156,19 @@
   word-break: break-word;
 }
 
-.chat-message.admin .message-content {
+.fc-chat-message.admin .fc-message-content {
   background: #e2e8f0;
   color: #1f2937;
 }
 
-.message-time {
+.fc-message-time {
   font-size: 11px;
   opacity: 0.7;
   padding: 0 4px;
 }
 
 /* Admin Reply */
-.message-reply {
+.fc-message-reply {
   max-width: 85%;
   background: #fff0f6;
   border-left: 3px solid #c71585;
@@ -175,19 +177,19 @@
   font-size: 12px;
 }
 
-.message-reply strong {
+.fc-message-reply strong {
   color: #c71585;
   display: block;
   margin-bottom: 4px;
 }
 
-.message-reply p {
+.fc-message-reply p {
   margin: 0;
   color: #1f2937;
 }
 
 /* Chat Form */
-.chat-form {
+.fc-chat-form {
   display: flex;
   gap: 8px;
   padding: 12px;
@@ -196,7 +198,7 @@
   flex-shrink: 0;
 }
 
-.chat-form input {
+.fc-chat-form input {
   flex: 1;
   border: 1px solid #e2e8f0;
   border-radius: 24px;
@@ -206,17 +208,17 @@
   transition: all 0.2s;
 }
 
-.chat-form input:focus {
+.fc-chat-form input:focus {
   border-color: #c71585;
   box-shadow: 0 0 0 3px rgba(199, 21, 133, 0.1);
 }
 
-.chat-form input:disabled {
+.fc-chat-form input:disabled {
   background: #f3f4f6;
   color: #999;
 }
 
-.chat-form button {
+.fc-chat-form button {
   width: 40px;
   height: 40px;
   background: #c71585;
@@ -230,42 +232,42 @@
   transition: all 0.2s;
 }
 
-.chat-form button:hover:not(:disabled) {
+.fc-chat-form button:hover:not(:disabled) {
   background: #a01366;
   transform: scale(1.05);
 }
 
-.chat-form button:disabled {
+.fc-chat-form button:disabled {
   background: #ccc;
   cursor: not-allowed;
 }
 
 /* Scroll styling */
-.chat-messages::-webkit-scrollbar {
+.fc-chat-messages::-webkit-scrollbar {
   width: 6px;
 }
 
-.chat-messages::-webkit-scrollbar-track {
+.fc-chat-messages::-webkit-scrollbar-track {
   background: #f1f5f9;
 }
 
-.chat-messages::-webkit-scrollbar-thumb {
+.fc-chat-messages::-webkit-scrollbar-thumb {
   background: #cbd5e1;
   border-radius: 3px;
 }
 
-.chat-messages::-webkit-scrollbar-thumb:hover {
+.fc-chat-messages::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
 }
 
 /* Mobile Responsive */
 @media (max-width: 480px) {
-  .floating-chat-container {
+  .fc-floating-chat-container {
     bottom: 20px;
     right: 20px;
   }
 
-  .chat-window {
+  .fc-chat-window {
     width: 100vw;
     max-width: 100%;
     height: 100vh;
@@ -277,7 +279,7 @@
     top: 0;
   }
 
-  .chat-toggle-btn {
+  .fc-chat-toggle-btn {
     width: 50px;
     height: 50px;
   }
