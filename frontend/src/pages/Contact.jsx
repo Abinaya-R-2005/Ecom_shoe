@@ -56,12 +56,7 @@ const Contact = () => {
       {/* Pink Banner */}
       <section className="contact-hero">
         <h1>Contact Us</h1>
-        <p className="breadcrumb">
-        <span onClick={() => navigate("/home")} className="home-link">
-            Home
-        </span>
-        &nbsp;• Contact
-        </p>
+        
 
       </section>
 

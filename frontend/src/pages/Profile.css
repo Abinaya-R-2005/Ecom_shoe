@@ -1,78 +1,97 @@
-:root {
-  --p-purple: #2E7D32;
-  --p-purple-dark: #1B5E20;
-  --p-purple-light: #E8F5E9;
-  --p-gold: #f59e0b;
-  --p-gold-light: #fffbeb;
-  --p-slate: #1e293b;
-  --p-gray: #64748b;
-  --p-bg: linear-gradient(180deg, #f8fafc, #f1f5f9);
-}
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syncopate:wght@700&display=swap');
 
-/* -------------------------------------------------- */
-/* PAGE BASE */
-/* -------------------------------------------------- */
+:root {
+  /* Refined Palette */
+  --brand-green: #2E7D32;
+  --brand-green-dark: #1B5E20;
+  --brand-green-soft: #f0fdf4;
+  --accent-gold: #b45309;
+  --ui-slate: #0f172a;
+  --ui-gray: #64748b;
+  --ui-border: #e2e8f0;
+  --ui-bg: #f8fafc;
+  --shadow-sm: 0 2px 4px rgba(0,0,0,0.02);
+  --shadow-md: 0 10px 30px -10px rgba(0,0,0,0.08);
+  --radius-lg: 24px;
+  --radius-md: 16px;
+}
 
 .pro-page-bg {
-  background: var(--p-bg);
+  background-color: var(--ui-bg);
   min-height: 100vh;
-  padding: 60px 20px;
+  padding: 40px 5% 100px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
+/* --- BACK BUTTON --- */
+.pro-back-wrapper {
+  max-width: 1200px;
+  margin: 0 auto 32px;
+}
+
+.pro-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  border: 1px solid var(--ui-border);
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--ui-slate);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pro-back-btn:hover {
+  border-color: var(--brand-green);
+  color: var(--brand-green);
+  transform: translateX(-4px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* --- LAYOUT --- */
 .pro-container {
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 320px 1fr;
-  gap: 50px;
+  gap: 60px;
+  align-items: start;
 }
 
-/* -------------------------------------------------- */
-/* SIDEBAR */
-/* -------------------------------------------------- */
-
+/* --- SIDEBAR CARD --- */
 .pro-sidebar {
   position: sticky;
   top: 40px;
-  height: fit-content;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
 }
 
 .pro-user-card {
   background: white;
-  padding: 40px 20px;
-  border-radius: 28px;
+  padding: 40px 30px;
+  border-radius: var(--radius-lg);
   text-align: center;
-  box-shadow: 0 20px 40px rgba(124, 58, 237, 0.15);
-  border: 1px solid #ede9fe;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  border: 1px solid white;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 24px;
 }
 
 .pro-avatar-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   position: relative;
-  width: 120px;
-  height: 120px;
-  margin-bottom: 20px;
+  width: 110px;
+  height: 110px;
+  margin: 0 auto 24px;
 }
 
 .pro-avatar-wrapper {
-  width: 120px;
-  height: 120px;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
   overflow: hidden;
-  background: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 4px solid var(--p-purple-light);
-  box-shadow: 0 0 0 4px #ede9fe;
+  background: var(--ui-bg);
+  border: 3px solid white;
+  box-shadow: 0 0 0 1px var(--ui-border);
 }
 
 .pro-avatar-img {
@@ -82,62 +101,61 @@
 }
 
 .pro-avatar-placeholder {
-  font-size: 80px;
-  color: #cad1ea;
+  font-size: 70px;
+  color: var(--ui-border);
+  margin-top: 15px;
 }
 
 .pro-avatar-edit-btn {
   position: absolute;
   bottom: 0;
   right: 0;
-  transform: translate(25%, 25%);
-  background: linear-gradient(135deg, var(--p-purple), var(--p-purple-dark));
+  background: var(--brand-green);
   color: white;
-  border: none;
-  padding: 8px;
+  border: 2px solid white;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.pro-user-card h2 {
+  font-family: 'Syncopate', sans-serif;
+  font-size: 1.2rem;
+  color: var(--ui-slate);
+  margin: 0;
 }
 
 .pro-user-meta {
-  color: var(--p-gray);
-  font-size: 0.9rem;
-  margin-top: 6px;
+  color: var(--ui-gray);
+  font-size: 0.85rem;
+  margin-top: 8px;
 }
 
-/* -------------------------------------------------- */
-/* SIDE NAV */
-/* -------------------------------------------------- */
-
+/* --- SIDE NAV --- */
 .pro-side-nav {
   background: white;
-  padding: 16px;
-  border-radius: 20px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-  border: 1px solid #f1f5f9;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  border-radius: var(--radius-md);
+  padding: 10px;
+  border: 1px solid var(--ui-border);
 }
 
 .pro-nav-btn {
   width: 100%;
   display: flex;
   align-items: center;
-  padding: 14px 16px;
+  padding: 14px 18px;
   border: none;
   background: transparent;
   cursor: pointer;
   border-radius: 12px;
   font-weight: 600;
-  font-size: 1rem;
-  color: var(--p-slate);
-  transition: all 0.2s ease;
+  color: var(--ui-slate);
+  transition: 0.2s;
 }
 
 .pro-nav-btn span {
@@ -147,235 +165,181 @@
 }
 
 .pro-nav-btn:hover {
-  background: var(--p-purple-light);
-  color: var(--p-purple);
-  padding-left: 20px;
+  background: var(--brand-green-soft);
+  color: var(--brand-green);
 }
 
 .pro-logout-btn {
+  margin-top: 10px;
+  border-top: 1px solid var(--ui-border);
+  border-radius: 0 0 12px 12px;
   color: #ef4444;
-  margin-top: 8px;
-  border-top: 1px solid #f1f5f9;
-  padding-top: 14px;
 }
 
-.pro-logout-btn:hover {
-  background: #fef2f2;
-  color: #dc2626;
-  padding-left: 18px;
-}
-
-/* -------------------------------------------------- */
-/* CONTENT SECTIONS */
-/* -------------------------------------------------- */
-
-.pro-content-area {
-  padding-bottom: 40px;
-}
-
+/* --- CONTENT SECTIONS --- */
 .pro-content-section {
-  margin-bottom: 60px;
-}
-
-.section-header-flex {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  margin-bottom: 32px;
+  border: 1px solid white;
+  box-shadow: var(--shadow-md);
 }
 
 .header-title {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 15px;
+  margin-bottom: 30px;
+  color: var(--brand-green);
 }
 
 .header-title h3 {
-  font-size: 1.45rem;
-  font-weight: 800;
-  color: var(--p-slate);
+  font-family: 'Syncopate', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  margin: 0;
+  color: var(--ui-slate);
 }
 
-/* -------------------------------------------------- */
-/* ORDERS */
-/* -------------------------------------------------- */
-
+/* --- ORDER CARDS --- */
 .pro-order-card {
-  background: white;
-  padding: 22px 30px;
-  border-radius: 18px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 15px;
-  border-left: 6px solid var(--p-purple);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-  transition: transform 0.25s ease;
+  padding: 20px;
+  background: var(--ui-bg);
+  border-radius: var(--radius-md);
+  margin-bottom: 12px;
+  transition: 0.2s;
 }
 
 .pro-order-card:hover {
-  transform: translateY(-3px);
+  background: white;
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-2px);
+}
+
+.pro-order-card strong {
+  display: block;
+  font-size: 1rem;
+  color: var(--ui-slate);
+}
+
+.pro-order-card p {
+  font-size: 0.8rem;
+  color: var(--ui-gray);
+  margin: 4px 0 0;
 }
 
 .status-badge {
   padding: 6px 14px;
-  border-radius: 99px;
+  border-radius: 8px;
   font-size: 0.7rem;
-  font-weight: 800;
+  font-weight: 700;
   text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.status-badge.delivered {
-  background: #dcfce7;
-  color: #15803d;
-}
+.status-badge.delivered { background: #dcfce7; color: #166534; }
+.status-badge.shipped { background: #fef9c3; color: #854d0e; }
 
-.status-badge.shipped {
-  background: var(--p-gold-light);
-  color: #92400e;
-}
-
-/* -------------------------------------------------- */
-/* ADDRESS */
-/* -------------------------------------------------- */
-
+/* --- ADDRESS CARDS --- */
 .pro-address-card {
-  background: white;
-  padding: 28px 32px;
-  border-radius: 20px;
-  border: 1px solid #ede9fe;
-  box-shadow: 0 8px 20px rgba(124, 58, 237, 0.1);
-  transition: all 0.3s ease;
-  margin-bottom: 1em;
-  /* spacing in grid? */
+  padding: 24px;
+  background: var(--ui-bg);
+  border-radius: var(--radius-md);
+  margin-bottom: 16px;
+  border: 1px solid transparent;
 }
 
-.pro-address-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--p-purple);
+.pro-address-card strong {
+  color: var(--brand-green);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+}
+
+.pro-address-card p {
+  margin: 8px 0 0;
+  color: var(--ui-slate);
+  font-size: 0.95rem;
+  line-height: 1.5;
 }
 
 .pro-add-btn {
-  background: linear-gradient(135deg, var(--p-gold-light), #fde68a);
-  color: var(--p-gold);
+  background: var(--ui-slate);
+  color: white;
   border: none;
-  padding: 10px 22px;
-  border-radius: 999px;
-  font-weight: 800;
-  margin-top: 20px;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   cursor: pointer;
+  margin-top: 10px;
 }
 
-/* -------------------------------------------------- */
-/* FORMS */
-/* -------------------------------------------------- */
-
+/* --- FORMS & INPUTS --- */
 .pro-form-card {
-  background: white;
-  padding: 40px;
-  border-radius: 28px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
-  border: 1px solid #ede9fe;
-  margin-top: 20px;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--ui-border);
 }
 
 .pro-form-card input,
 .pro-form-card textarea {
   width: 100%;
-  padding: 14px 16px;
-  border-radius: 14px;
-  border: 1.5px solid #e2e8f0;
-  margin-bottom: 18px;
-  font-size: 0.95rem;
-  transition: all 0.25s ease;
-  box-sizing: border-box;
-  /* Fix sizing issues */
+  background: var(--ui-bg);
+  border: 1px solid var(--ui-border);
+  padding: 14px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  font-family: inherit;
+  transition: 0.2s;
 }
 
-.pro-form-card input:focus,
-.pro-form-card textarea:focus {
+.pro-form-card input:focus {
+  background: white;
   outline: none;
-  border-color: var(--p-purple);
-  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.25);
+  border-color: var(--brand-green);
+  box-shadow: 0 0 0 4px var(--brand-green-soft);
 }
 
-.pro-pwd-btn {
-  background: linear-gradient(135deg, var(--p-purple), var(--p-purple-dark));
+.pro-pwd-btn, .pro-form-card button {
+  background: var(--brand-green);
   color: white;
   border: none;
-  padding: 14px 46px;
-  border-radius: 999px;
-  font-weight: 800;
+  padding: 14px 30px;
+  border-radius: 12px;
+  font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 12px 30px rgba(124, 58, 237, 0.4);
+  transition: 0.3s;
 }
 
 .pro-pwd-btn:hover {
-  transform: translateY(-3px);
+  background: var(--brand-green-dark);
+  box-shadow: 0 8px 20px rgba(46, 125, 50, 0.2);
 }
 
 .pro-empty-placeholder {
   text-align: center;
   padding: 40px;
-  background: white;
-  border-radius: 20px;
-  border: 2px dashed #c7d2fe;
-  color: var(--p-gray);
+  color: var(--ui-gray);
+  border: 2px dashed var(--ui-border);
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
 }
 
-/* -------------------------------------------------- */
-/* BUTTONS */
-/* -------------------------------------------------- */
-
-.add-new-btn {
-  background: linear-gradient(135deg, var(--p-gold-light), #fde68a);
-  color: var(--p-gold);
-  border: none;
-  padding: 10px 22px;
-  border-radius: 999px;
-  font-weight: 800;
-}
-
-/* -------------------------------------------------- */
-/* BACK BUTTON */
-/* -------------------------------------------------- */
-
-.pro-back-wrapper {
-  margin-bottom: 20px;
-}
-
-.pro-back-btn {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: white;
-  border: 1px solid #ede9fe;
-  padding: 12px 26px;
-  border-radius: 18px;
-  font-weight: 800;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.pro-back-btn:hover {
-  background: var(--p-purple);
-  color: white;
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(124, 58, 237, 0.35);
-}
-
-/* -------------------------------------------------- */
-/* RESPONSIVE */
-/* -------------------------------------------------- */
-
-@media (max-width: 968px) {
+/* --- RESPONSIVE --- */
+@media (max-width: 1024px) {
   .pro-container {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 40px;
   }
-
   .pro-sidebar {
     position: relative;
-    top: auto;
+    top: 0;
   }
 }

@@ -1,140 +1,355 @@
+@import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Work+Sans:wght@300;400;600&display=swap');
+
 :root {
-  --brand-pink: #c71585; /* Matches your About Us banner */
-  --light-blue-bg: #eaf4ff; /* Matches your Icon Bar */
-  --testimonial-pink: #ffe6f2; /* Matches your testimonial box */
+  --pink: #c71585;
+  --black: #0a0a0a;
+  --white: #ffffff;
+  --gray-light: #f4f4f4;
+  --easing: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.about-page-wrapper {
-  background-color: white;
-  color: #333;
-  position: relative;
+.innovative-about {
+  background: var(--white);
+  font-family: 'Work Sans', sans-serif;
+  color: var(--black);
+  overflow-x: hidden;
 }
 
-.back-btn-about {
-  position: absolute;
-  top: 100px;
-  left: 20px;
+/* --- HERO SPLIT --- */
+.hero-split {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  min-height: 90vh;
+  align-items: center;
+  padding: 0 5%;
+}
+
+.tagline {
+  color: var(--pink);
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.split-h1 {
+  font-family: 'Syncopate', sans-serif;
+  font-size: clamp(3rem, 7vw, 6rem);
+  line-height: 0.9;
+  margin-bottom: 30px;
+}
+
+.split-h1 .outline {
+  -webkit-text-stroke: 1.5px var(--black);
+  color: transparent;
+}
+
+.hero-para {
+  max-width: 450px;
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 40px;
+  color: #555;
+}
+
+.cta-main {
+  background: #c71585;
+ 
+  border: none;
+  padding: 18px 35px;
   display: flex;
   align-items: center;
-  gap: 8px;
-  background: white;
-  color: #c71585;
-  border: 2px solid #c71585;
-  padding: 10px 16px;
-  border-radius: 8px;
-  cursor: pointer;
+  gap: 15px;
   font-weight: 600;
+  cursor: pointer;
+  transition: var(--easing);
+}
+
+.cta-main:hover {
+  background: orchid;
+  transform: translateY(-5px);
+}
+
+.hero-img-stack {
+  position: relative;
+  padding: 40px;
+}
+
+.img-main {
+  width: 100%;
+  z-index: 2;
+  position: relative;
+  filter: grayscale(20%);
+}
+
+.accent-square {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 80%;
+  height: 80%;
+  background: var(--gray-light);
+  z-index: 1;
+}
+
+/* --- MARQUEE --- */
+.brand-marquee {
+  background: var(--black);
+  color: var(--white);
+  padding: 20px 0;
+  overflow: hidden;
+}
+
+.marquee-content {
+  display: flex;
+  gap: 50px;
+  white-space: nowrap;
+  animation: scroll 20s linear infinite;
+  font-family: 'Syncopate', sans-serif;
+  font-size: 14px;
+}
+
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* --- VISION GRID --- */
+.vision-container {
+  padding: 30px 5%;
+  background: #fafafa;
+}
+
+.vision-layout {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.vision-card {
+  background: white;
+  padding: 60px 40px;
+  border-bottom: 4px solid transparent;
+  transition: var(--easing);
+}
+
+.vision-card:hover {
+  border-color: var(--pink);
+  transform: translateY(-15px);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.05);
+}
+
+.vision-card.offset { margin-top: 40px; }
+
+.v-icon { font-size: 40px; color: var(--pink); margin-bottom: 30px; }
+
+/* --- DEPTH SECTION --- */
+.depth-section {
+  padding: 30px 5%;
+}
+
+.depth-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+/* Update these specific sections in your AboutPage.css */
+/* ... Keep your existing Hero and Marquee CSS ... */
+
+/* --- DEPTH SECTION ALIGNMENT --- */
+.depth-section {
+  padding: 80px 8%;
+  background: #fff;
+}
+
+.depth-content {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr; /* Gives text more room */
+  gap: 60px;
+  align-items: center; /* Vertically centers the text and the image */
+}
+
+.depth-title {
+  font-family: 'Syncopate', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  margin-bottom: 20px;
+  letter-spacing: -1px;
+}
+
+.depth-intro {
+  font-size: 17px;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 40px;
+  max-width: 600px;
+}
+
+/* --- IMAGE SIZE REDUCTION --- */
+.depth-image-container {
+  display: flex;
+  justify-content: center; /* Centers image horizontally in its column */
+  align-items: center;
+}
+
+.depth-image-box {
+  position: relative;
+  width: 100%;
+  max-width: 380px; /* Constrains the width of about.png */
+  margin: 0 auto;
+}
+
+.depth-img-small {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  display: block;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  filter: brightness(0.98);
+}
+
+.floating-badge {
+  position: absolute;
+  bottom: -15px;
+  right: -15px; /* Moved to right for better balance with small image */
+  background: var(--pink);
+  color: white;
+  padding: 10px 20px;
+  font-weight: 700;
+  font-size: 11px;
+  text-transform: uppercase;
+  box-shadow: 0 10px 20px rgba(199, 21, 133, 0.3);
+}
+
+/* --- GRID ITEMS --- */
+.depth-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+}
+
+.depth-col {
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  border-left: 3px solid transparent;
   transition: all 0.3s ease;
-  z-index: 10;
 }
 
-.back-btn-about:hover {
-  background: #c71585;
-  color: white;
-  transform: translateX(-4px);
+.depth-col:hover {
+  background: #fff;
+  border-left-color: var(--pink);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
 
-/* 1. Hero Banner */
-.pink-hero {
-  background-color: var(--brand-pink);
-  color: white;
-  text-align: center;
-  padding: 60px 0;
-}
-
-.pink-hero h1 {
-  font-size: 42px;
+.depth-col h4 {
+  font-family: 'Syncopate', sans-serif;
+  font-size: 13px;
   margin-bottom: 10px;
 }
 
-.hero-nav {
-  font-size: 14px;
-  opacity: 0.9;
+.depth-col p {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #777;
 }
 
-/* 2. Container Logic */
-.section-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 80px 20px;
+@media (max-width: 992px) {
+  .depth-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .depth-image-box {
+    max-width: 300px;
+    margin-top: 40px;
+  }
+  .depth-intro { margin: 0 auto 40px auto; }
 }
-
-.intro-header {
-  display: flex;
-  justify-content: space-between;
-  gap: 50px;
+.depth-intro {
+  max-width: 600px;
+  font-size: 17px;
+  line-height: 1.7;
+  color: #666;
   margin-bottom: 40px;
 }
 
-.intro-title h2 { font-size: 36px; font-weight: 700; }
-.subtitle { color: #666; font-size: 18px; margin-top: 5px; }
-
-.intro-text { max-width: 500px; color: #555; line-height: 1.7; }
-
-.full-width-image-wrapper img {
-  width: 100%;
-  border-radius: 20px;
-  max-height: 500px;
-  object-fit: cover;
-}
-
-/* 3. Icon Bar */
-.icon-bar {
-  background-color: var(--light-blue-bg);
-  padding: 60px 0;
-}
-
-.icon-grid {
+.depth-row {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 1fr 1fr; /* Maintains a neat 2x2 grid for the 4 items */
   gap: 30px;
-  text-align: center;
 }
 
-.icon-svg { font-size: 40px; margin-bottom: 15px; }
-.icon-item h3 { font-size: 18px; margin-bottom: 10px; }
-.icon-item p { font-size: 14px; color: #666; }
-
-/* 4. Why Choose Grid */
-.center-title { text-align: center; font-size: 38px; margin-bottom: 20px; }
-.center-desc { text-align: center; max-width: 800px; margin: 0 auto 50px; color: #666; }
-
-.split-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: flex-start;
+.depth-col {
+  padding: 20px;
+  background: #fcfcfc;
+  border-left: 1px solid #eee;
+  transition: all 0.3s ease;
 }
 
-.benefit-box {
-  margin-bottom: 30px;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 20px;
+.depth-col:hover {
+  background: #fff;
+  border-left-color: var(--pink);
+  transform: translateX(5px);
 }
 
-.benefit-box h3 { font-size: 22px; margin-bottom: 10px; }
-.benefit-box p { color: #666; line-height: 1.6; }
-
-.rounded-img {
-  width: 100%;
-  border-radius: 30px;
-  max-height: 600px;
-  object-fit: cover;
+.depth-col h4 {
+  font-size: 18px;
+  margin-bottom: 8px;
+  font-family: 'Syncopate', sans-serif;
+  letter-spacing: -1px;
 }
 
-/* 5. Testimonial Box */
-.testimonial-pink-box {
-  background-color: var(--testimonial-pink);
-  border-radius: 20px;
-  padding: 60px 40px;
-  text-align: center;
+.depth-col p {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #777;
 }
 
-.stars { color: #ffcc00; font-size: 20px; margin-bottom: 20px; }
-.testimonial-text { font-size: 20px; font-weight: 500; max-width: 800px; margin: 0 auto 20px; color: #1a1a1a; }
-.author { font-weight: 700; color: #333; }
-
-/* Mobile Adjustment */
 @media (max-width: 768px) {
-  .intro-header, .split-grid, .icon-grid { grid-template-columns: 1fr; flex-direction: column; }
+  .depth-row {
+    grid-template-columns: 1fr; /* Stack on mobile */
+  }
+}
+.depth-title { font-family: 'Syncopate', sans-serif; font-size: 40px; margin-bottom: 50px; }
+
+.depth-row { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+
+.num { font-size: 12px; font-weight: 800; color: var(--pink); display: block; margin-bottom: 10px; }
+
+.depth-image-box { position: relative; }
+.depth-image-box img { width: 100%; border-radius: 4px; }
+
+.floating-badge {
+  position: absolute;
+  bottom: 20px;
+  left: -30px;
+  background: var(--pink);
+  color: white;
+  padding: 15px 25px;
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+/* --- CLOSING --- */
+.closing-statement {
+  padding: 70px 5%;
+  text-align: center;
+}
+
+.quote-text {
+  font-family: 'Syncopate', sans-serif;
+  font-size: clamp(1.5rem, 3vw, 3rem);
+  margin-bottom: 20px;
+  color: #ddd;
+}
+
+.brand-signature { color: var(--pink); font-weight: 800; letter-spacing: 5px; }
+
+@media (max-width: 992px) {
+  .hero-split, .vision-layout, .depth-content, .depth-row { grid-template-columns: 1fr; }
+  .vision-card.offset { margin-top: 0; }
 }

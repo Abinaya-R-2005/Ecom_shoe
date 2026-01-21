@@ -1,109 +1,136 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaArrowLeft } from 'react-icons/fa';
+import { FaArrowRight, FaFingerprint, FaSnowflake, FaGlobe } from 'react-icons/fa';
 import Header from '../components/Header';
 import './AboutPage.css';
 
 const AboutPage = () => {
   const navigate = useNavigate();
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
-    <div className="about-page-wrapper">
+    <div className="innovative-about">
       <Header />
-      <button className="back-btn-about" onClick={() => navigate("/home")}>
-        <FaArrowLeft /> Back to Shop
-      </button>
       
-      {/* 1. Pink Hero Banner */}
-      <section className="pink-hero">
-        <h1>About Us</h1>
-        
-      </section>
-
-      {/* 2. Intro Section with Large Image */}
-      <section className="section-container">
-        <div className="intro-header">
-          <div className="intro-title">
-            <h2>Step with Confidence</h2>
-            <p className="subtitle">The ultimate Grip Socks experience</p>
-          </div>
-          <div className="intro-text">
-            <p>At Highgrip, we craft non-skid socks that combine functional traction with everyday comfort and durability. Designed with precision and purpose, our collections support active lifestyles and recovery—without compromising style.</p>
+      {/* 1. ASYMMETRIC HERO */}
+      <section className="hero-split">
+        <div className="hero-left">
+          <div className="reveal-box">
+            <span className="tagline">The Highgrip Ethos</span>
+            <h1 className="split-h1">Safety, <br/><span className="outline">Redefined.</span></h1>
+            <p className="hero-para">
+              We don't just make socks. We engineer stability for the modern mover. 
+              A worldwide fusion of performance tech and aesthetic luxury.
+            </p>
+            <div className="btn-group">
+              <button className="cta-main" onClick={() => navigate('/home')}>
+                Shop Collection <FaArrowRight />
+              </button>
+            </div>
           </div>
         </div>
-        
-        <div className="full-width-image-wrapper">
-          <img src="/sockss.png" alt="Highgrip Socks" />
-        </div>
-      </section>
-
-      {/* 3. Light Blue Icon Bar */}
-      <section className="icon-bar">
-        <div className="container icon-grid">
-          <div className="icon-item">
-            <div className="icon-svg">🛋️</div>
-            <h3>All-Day Comfort</h3>
-            <p>Experience unmatched comfort that lasts from morning till night</p>
-          </div>
-          <div className="icon-item">
-            <div className="icon-svg">🦶</div>
-            <h3>Safe Grip Technology</h3>
-            <p>Our advanced anti-skid and ankle-grip technology ensures a secure fit</p>
-          </div>
-          <div className="icon-item">
-            <div className="icon-svg">🏅</div>
-            <h3>Best Quality</h3>
-            <p>Crafted with precision and care, our socks are made from the finest materials</p>
-          </div>
-          <div className="icon-item">
-            <div className="icon-svg">🔄</div>
-            <h3>Lasting performance</h3>
-            <p>Built to go the distance, our socks maintain their fit, feel, and function over time.</p>
+        <div className="hero-right">
+          <div className="hero-img-stack">
+            <img src="/sockss.png" alt="Highgrip Product" className="img-main" />
+            <div className="accent-square"></div>
           </div>
         </div>
       </section>
 
-      {/* 4. Why Choose Section */}
-      <section className="section-container why-choose">
-        <h2 className="center-title">Why Choose Highgrip?</h2>
-        <p className="center-desc">Because your safety and comfort shouldn't be compromised. Highgrip socks are designed to give you unbeatable traction, all-day comfort, and versatile style—no matter where life takes you.</p>
-        
-        <div className="split-grid">
-          <div className="benefits-column">
-            <div className="benefit-box">
-              <h3>Non-Skid Grip Technology</h3>
-              <p>Say goodbye to slips and falls. Our specially designed rubber grips provide excellent traction on smooth floors—perfect for home, hospital, or studio use.</p>
-            </div>
-            <div className="benefit-box">
-              <h3>Style + Safety Combined</h3>
-              <p>From ankle cuts to thigh-highs, we offer a range of designs that don't compromise on aesthetics—because safety can look good too.</p>
-            </div>
-            <div className="benefit-box">
-              <h3>Trusted for Medical & Active Use</h3>
-              <p>Recommended for seniors, patients, athletes, and everyday wear—Highgrip socks support your lifestyle with reliable performance.</p>
-            </div>
-            <div className="benefit-box">
-              <h3>Versatile for Everyone</h3>
-              <p>Whether you're practicing yoga, recovering in a hospital, chasing toddlers, or bouncing at a trampoline park—there's a Highgrip sock for you.</p>
+      {/* 2. INFINITE MARQUEE */}
+      <div className="brand-marquee">
+        <div className="marquee-content">
+          <span>HIGH-TRACTION</span>
+          <span>•</span>
+          <span>PREMIUM COTTON</span>
+          <span>•</span>
+          <span>ALL-DAY COMFORT</span>
+          <span>•</span>
+          <span>BEST QUALITY</span>
+          <span>•</span>
+          <span>LASTING PERFORMANCE</span>
+          <span>•</span>
+          <span>PREMIUM COTTON</span>
+        </div>
+      </div>
+
+      {/* 3. INNOVATIVE GRID */}
+      <section className="vision-container">
+        <div className="vision-layout">
+          <div className="vision-card">
+            <div className="card-inner">
+              <FaFingerprint className="v-icon" />
+              <h3>The Grip Lock</h3>
+              <p>Our signature silicone pattern is inspired by biometric textures, ensuring zero-slip performance on every surface.</p>
             </div>
           </div>
-          <div className="image-column">
-            <img src="/yoga.png" alt="Yoga Lifestyle" className="rounded-img" />
+          <div className="vision-card offset">
+            <div className="card-inner">
+              <FaSnowflake className="v-icon" />
+              <h3>Thermal Breathability</h3>
+              <p>Woven with aerated fibers to keep your feet at the perfect temperature, whether in a studio or at home.</p>
+            </div>
+          </div>
+          <div className="vision-card">
+            <div className="card-inner">
+              <FaGlobe className="v-icon" />
+              <h3>Universal Fit</h3>
+              <p>Designed for the global anatomy. Stretching comfort that maintains its architectural integrity wash after wash.</p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* 5. Pink Testimonial Box */}
-      <section className="section-container testimonial-outer">
-        <div className="testimonial-pink-box">
-          <div className="stars">★★★★★</div>
-          <p className="testimonial-text">
-            "As a fitness trainer, grip and stability are everything—especially during high-intensity workouts. Highgrip socks give me the traction I need without sacrificing comfort. They've become a must-have in my training gear."
-          </p>
-          <p className="author">Happy Customer</p>
+      {/* 4. REFINED DEPTH SECTION (Why Us) */}
+      <section className="depth-section">
+        <div className="depth-content">
+          <div className="depth-text">
+            <h2 className="depth-title">Why move with us?</h2>
+            <p className="depth-intro">
+              Because your safety and comfort shouldn’t be compromised. Highgrip socks are designed to give 
+              you unbeatable traction, all-day comfort, and versatile style—no matter where life takes you.
+            </p>
+            
+            <div className="depth-row">
+              <div className="depth-col">
+                <span className="num">01</span>
+                <h4>Non-Skid Tech</h4>
+                <p>Say goodbye to slips. Our rubber grips provide excellent traction on smooth floors—perfect for home or studio.</p>
+              </div>
+              <div className="depth-col">
+                <span className="num">02</span>
+                <h4>Style + Safety</h4>
+                <p>From ankle cuts to thigh-highs, we offer a range of designs that don’t compromise on aesthetics.</p>
+              </div>
+              <div className="depth-col">
+                <span className="num">03</span>
+                <h4>Trusted Use</h4>
+                <p>Recommended for seniors, patients, and athletes. Reliable performance for every lifestyle.</p>
+              </div>
+              <div className="depth-col">
+                <span className="num">04</span>
+                <h4>Versatile Flow</h4>
+                <p>From yoga and chasing toddlers to hospital recovery or trampoline parks—there’s a Highgrip for you.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div className="depth-image-box">
+            <img src="/about.png" alt="Yoga Performance" className="depth-img" />
+           
+            <div className="floating-badge">Verified Grip</div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. MINIMALIST QUOTE AREA */}
+      <section className="closing-statement">
+        <div className="statement-inner">
+          <p className="quote-text">"Movement is a right, stability is a necessity."</p>
+          <span className="brand-signature">— HIGHGRIP COLLECTIVE</span>
         </div>
       </section>
     </div>
