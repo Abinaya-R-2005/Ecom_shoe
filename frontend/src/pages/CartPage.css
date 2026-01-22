@@ -2,6 +2,8 @@
 .cart-page-wrapper {
   background-color: #f8fafc;
   min-height: 100vh;
+  padding-top: 130px;
+  /* Space for the fixed header */
 }
 
 .cart-container {

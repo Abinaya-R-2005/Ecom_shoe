@@ -15,9 +15,12 @@ code {
 }
 
 :root {
-  --primary-color: #2E7D32; /* Forest Green */
-  --primary-dark: #1B5E20;  /* Dark Green */
-  --accent-color: #66BB6A;  /* Light Green */
+  --primary-color: #c2188b;
+  /* Brand Pink */
+  --primary-dark: #a01373;
+  /* Darker Pink */
+  --accent-color: #f472b6;
+  /* Light Pink */
   --text-dark: #1f2937;
   --text-light: #6b7280;
   --bg-light: #f3f4f6;

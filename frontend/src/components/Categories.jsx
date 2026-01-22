@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "./Categories.css";
 
 export default function Categories() {
   const { categories } = require("../data/categories");

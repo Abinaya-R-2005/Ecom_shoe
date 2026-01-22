@@ -1,10 +1,77 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import Header from "../components/Header";
+import ProductCard from "../components/ProductCard";
+import SidebarFilters from "../components/SidebarFilters";
 import "./HomePage.css";
-import "../components/Header";
 
 export default function Home() {
+  const [allProducts, setAllProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filters, setFilters] = useState({
+    deals: [],
+    delivery: [],
+    maxPrice: 2000,
+    minPrice: 0,
+    minRating: 0,
+    payOnDelivery: false
+  });
+
+  useEffect(() => {
+    fetch("http://localhost:5000/products")
+      .then((res) => res.json())
+      .then((data) => {
+        setAllProducts(data);
+        setFilteredProducts(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Failed to fetch products:", err);
+        setLoading(false);
+      });
+  }, []);
+
+  // Handle filter changes
+  const handleFilterChange = (key, value) => {
+    setFilters(prev => ({ ...prev, [key]: value }));
+  };
+
+  const handleSearch = (term) => {
+    setSearchTerm(term.toLowerCase());
+  };
+
+  // Apply filters whenever filters, search, or allProducts change
+  useEffect(() => {
+    let result = [...allProducts];
+
+    // 🔍 Search Filter
+    if (searchTerm) {
+      result = result.filter(p =>
+        p.name.toLowerCase().includes(searchTerm) ||
+        p.category.toLowerCase().includes(searchTerm)
+      );
+    }
+
+    // Price Filter
+    result = result.filter(p => p.price >= (filters.minPrice || 0) && p.price <= filters.maxPrice);
+
+    // Rating Filter
+    if (filters.minRating > 0) {
+      result = result.filter(p => (p.averageRating || 0) >= filters.minRating);
+    }
+
+    // Mock Filters
+    if (filters.deals.includes("republic")) {
+      result = result.filter(p => p.discountPercent > 0 || p.tag === "Sale");
+    }
+
+    setFilteredProducts(result);
+  }, [filters, searchTerm, allProducts]);
+
   return (
     <div className="home">
+      <Header onSearch={handleSearch} />
 
       {/* HERO */}
       <section className="hero">
@@ -32,7 +99,7 @@ export default function Home() {
         </div>
 
         <div className="hero-right">
-          <img src="/images/hero.png" alt="Hero Shoe" />
+          <img src="/highgrip.png" alt="Hero Shoe" />
           <div className="iso-badge">
             Medical Grade <br />
             <strong>ISO CERTIFIED</strong>
@@ -40,44 +107,52 @@ export default function Home() {
         </div>
       </section>
 
-      {/* COLLECTION */}
-      <section className="collection">
-        <h2>EXPLORE COLLECTION</h2>
-        <p>Seven innovative categories designed for maximum performance</p>
+      {/* Main Shop Section with Sidebar */}
+      <div className="shop-layout container" style={{ display: 'flex', gap: '40px', padding: '60px 20px' }}>
+        <SidebarFilters filters={filters} onFilterChange={handleFilterChange} />
 
-        <div className="collection-grid">
-          <div className="big-card">
-            <img src="/images/yoga.png" alt="Yoga Socks" />
-            <span>Yoga Socks</span>
-          </div>
-          <div className="small-card">
-            <img src="/images/compression.png" alt="Compression Socks" />
-            <span>Compression</span>
-          </div>
-          <div className="small-card">
-            <img src="/images/thigh.png" alt="Thigh High Socks" />
-            <span>Thigh High</span>
-          </div>
+        <div className="shop-main" style={{ flex: 1 }}>
+          <section className="collection-compact" style={{ marginBottom: '40px' }}>
+            <h2 style={{ marginBottom: '10px' }}>EXPLORE COLLECTION</h2>
+            <p style={{ color: '#6b7280' }}>{filteredProducts.length} items found based on your filters</p>
+          </section>
+
+          <section className="products-grid-container">
+            {loading ? (
+              <p>Loading products...</p>
+            ) : filteredProducts.length === 0 ? (
+              <div className="no-results" style={{ textAlign: 'center', padding: '100px 0' }}>
+                <h3>No products match your filters</h3>
+                <button
+                  onClick={() => setFilters({
+                    deals: [],
+                    delivery: [],
+                    maxPrice: 2000,
+                    minPrice: 0,
+                    minRating: 0,
+                    payOnDelivery: false
+                  })}
+                  className="minimal-logout"
+                  style={{ marginTop: '20px' }}
+                >
+                  Clear All Filters
+                </button>
+              </div>
+            ) : (
+              <div className="products" style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+                gap: '30px',
+                padding: '0' // Adjusted padding because container handles it
+              }}>
+                {filteredProducts.map((product) => (
+                  <ProductCard key={product._id} product={product} />
+                ))}
+              </div>
+            )}
+          </section>
         </div>
-      </section>
-
-      {/* PRODUCTS */}
-      <section className="products">
-        {[
-          { img: "p1.png", score: "97/100", price: "$44.99", title: "Medical Recovery Socks" },
-          { img: "p2.png", score: "94/100", price: "$27.99", title: "Trampoline Fitness Socks" },
-          { img: "p3.png", score: "90/100", price: "$19.99", title: "Classic Grip Socks" },
-        ].map((item, i) => (
-          <div className="product-card" key={i}>
-            <span className="score">{item.score}</span>
-            <img src={`/images/${item.img}`} alt={item.title} />
-            <h4>{item.title}</h4>
-            <h3>{item.price}</h3>
-            <p>Premium grip technology with medical-grade silicone.</p>
-            <button>View Details</button>
-          </div>
-        ))}
-      </section>
+      </div>
 
       {/* GRIP TECH */}
       <section className="grip">
@@ -85,7 +160,7 @@ export default function Home() {
         <p>Revolutionary grip engineered for peak performance</p>
 
         <div className="grip-content">
-          <img src="/images/chip.png" alt="Grip Chip" />
+          <img src="/highgrip.png" alt="Grip Tech" />
           <div>
             <div className="grip-box">
               <h4>Medical Grade Silicone</h4>
@@ -109,26 +184,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* STATS */}
-      <section className="stats">
-        <div>
-          <h2>500+</h2>
-          <span>Athletes</span>
-        </div>
-        <div>
-          <h2>50K+</h2>
-          <span>Sold</span>
-        </div>
-        <div>
-          <h2>4.9★</h2>
-          <span>Rating</span>
-        </div>
-        <div>
-          <h2>98%</h2>
-          <span>Recommend</span>
-        </div>
-      </section>
-
       {/* FOOTER */}
       <footer className="footer">
         <h3>HIGHGRIP</h3>
@@ -138,3 +193,5 @@ export default function Home() {
     </div>
   );
 }
+
+

@@ -5,10 +5,14 @@
   font-family: "Poppins", sans-serif;
 }
 
+.home {
+  padding-top: 140px;
+}
+
 .hero {
   display: flex;
   justify-content: space-between;
-  padding: 80px;
+  padding: 60px 80px;
 }
 
 .hero h1 {
@@ -64,23 +68,15 @@
 
 .products {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 30px;
-  padding: 80px;
+  padding: 80px 10%;
+  background: #fdf2f8;
+  /* Light contrast for products section */
 }
 
-.product-card {
-  padding: 20px;
-  border-radius: 20px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
+/* Redundant styles removed as they are now in ProductCard.css */
 
-.score {
-  background: black;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 10px;
-}
 
 .grip {
   background: #0c1630;
@@ -110,7 +106,7 @@
 
 .proof-grid {
   display: grid;
-  grid-template-columns: repeat(3,1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 30px;
 }
 

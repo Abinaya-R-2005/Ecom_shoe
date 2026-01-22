@@ -3,7 +3,7 @@ import { FaHeart, FaEye, FaShoppingCart, FaStar } from "react-icons/fa";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useWishlist } from "../context/WishlistContext";
 import { useCart } from "../context/CartContext";
-import "./ProductCard.css";
+import "../styles/ProductCard.css";
 
 const ProductCard = ({ product }) => {
   const navigate = useNavigate();

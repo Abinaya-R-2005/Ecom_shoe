@@ -1,7 +1,8 @@
 /* --- VARIABLES & BASE THEME --- */
 :root {
   --boutique-pink: #c71585;
-  --bg-editorial: #fffafd; /* Luxury off-white pink tint */
+  --bg-editorial: #fffafd;
+  /* Luxury off-white pink tint */
   --text-main: #111111;
   --text-light: #777777;
   --ease: cubic-bezier(0.2, 1, 0.3, 1);
@@ -12,13 +13,13 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  padding-top: 130px;
+  /* Space for the fixed header */
   /* Sophisticated gradient for a high-end feel */
-  background: linear-gradient(
-    180deg, 
-    #ffffff 0%, 
-    var(--bg-editorial) 50%, 
-    #f7f7f7 100%
-  );
+  background: linear-gradient(180deg,
+      #ffffff 0%,
+      var(--bg-editorial) 50%,
+      #f7f7f7 100%);
   background-attachment: fixed;
 }
 
@@ -32,27 +33,58 @@
 
 /* --- ENTRANCE ANIMATIONS --- */
 @keyframes revealUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes heartFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 @keyframes buttonSlideIn {
-  from { opacity: 0; transform: translateX(20px); }
-  to { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-.reveal-fade { animation: fadeIn 1s var(--ease) both; }
-.reveal-up { animation: revealUp 0.8s var(--ease) both; }
+.reveal-fade {
+  animation: fadeIn 1s var(--ease) both;
+}
+
+.reveal-up {
+  animation: revealUp 0.8s var(--ease) both;
+}
 
 .grid-item-reveal {
   opacity: 0;
@@ -86,9 +118,10 @@
   align-items: center;
   gap: 12px;
   background: #ffffff;
-  border: 1px solid black; 
+  border: 1px solid black;
   padding: 12px 28px;
-  border-radius: 0px; /* Sharp editorial corners */
+  border-radius: 0px;
+  /* Sharp editorial corners */
   font-weight: 700;
   font-size: 11px;
   color: #1a1a1a;
@@ -132,7 +165,8 @@
 .icon-aesthetic-circle {
   width: 120px;
   height: 120px;
-  background: #fdf2f8; /* Soft pink-white circle */
+  background: #fdf2f8;
+  /* Soft pink-white circle */
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -147,7 +181,7 @@
 }
 
 .luxury-title {
-  font-family: serif; 
+  font-family: serif;
   font-size: 36px;
   font-weight: 400;
   color: var(--text-main);
@@ -219,15 +253,23 @@
 
 /* --- RESPONSIVE ADJUSTMENTS --- */
 @media (max-width: 768px) {
-  .luxury-title { font-size: 28px; }
-  .editorial-title { 
-    font-size: 22px; 
+  .luxury-title {
+    font-size: 28px;
+  }
+
+  .editorial-title {
+    font-size: 22px;
     justify-content: center;
     text-align: center;
   }
-  .products-staggered-grid { 
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); 
-    gap: 20px; 
+
+  .products-staggered-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 20px;
   }
-  .empty-state-container { padding: 40px 20px; border: none; }
+
+  .empty-state-container {
+    padding: 40px 20px;
+    border: none;
+  }
 }

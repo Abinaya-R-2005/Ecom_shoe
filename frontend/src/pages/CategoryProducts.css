@@ -1,5 +1,6 @@
-.category-page {
-  padding: 30px;
+.category-page.container {
+  padding-top: 150px;
+  padding-bottom: 60px;
 }
 
 /* 🔙 Back Button */
@@ -53,7 +54,8 @@
   }
 
   .category-page {
-    padding: 15px;
+    padding: 150px 15px 15px 15px;
+    /* Maintain space for header on mobile */
   }
 
   .product-card img {

@@ -10,8 +10,8 @@
   --ui-gray: #64748b;
   --ui-border: #e2e8f0;
   --ui-bg: #f8fafc;
-  --shadow-sm: 0 2px 4px rgba(0,0,0,0.02);
-  --shadow-md: 0 10px 30px -10px rgba(0,0,0,0.08);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 10px 30px -10px rgba(0, 0, 0, 0.08);
   --radius-lg: 24px;
   --radius-md: 16px;
 }
@@ -19,7 +19,8 @@
 .pro-page-bg {
   background-color: var(--ui-bg);
   min-height: 100vh;
-  padding: 40px 5% 100px;
+  padding: 130px 5% 100px;
+  /* Updated top padding for the fixed header */
   font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
@@ -241,8 +242,15 @@
   letter-spacing: 0.5px;
 }
 
-.status-badge.delivered { background: #dcfce7; color: #166534; }
-.status-badge.shipped { background: #fef9c3; color: #854d0e; }
+.status-badge.delivered {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-badge.shipped {
+  background: #fef9c3;
+  color: #854d0e;
+}
 
 /* --- ADDRESS CARDS --- */
 .pro-address-card {
@@ -307,7 +315,8 @@
   box-shadow: 0 0 0 4px var(--brand-green-soft);
 }
 
-.pro-pwd-btn, .pro-form-card button {
+.pro-pwd-btn,
+.pro-form-card button {
   background: var(--brand-green);
   color: white;
   border: none;
@@ -338,6 +347,7 @@
     grid-template-columns: 1fr;
     gap: 40px;
   }
+
   .pro-sidebar {
     position: relative;
     top: 0;

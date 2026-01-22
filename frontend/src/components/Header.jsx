@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaSearch, FaUser, FaHeart, FaShoppingCart, FaBars, FaTimes } from "react-icons/fa";
+import { FaSearch, FaUser, FaHeart, FaShoppingCart, FaBars, FaTimes, FaChevronDown } from "react-icons/fa";
 import "./Header.css";
 
 import { useWishlist } from "../context/WishlistContext";
@@ -40,71 +40,106 @@ const Header = ({ onSearch }) => {
   return (
     <header className={`main-header ${scrolled ? "header-scrolled" : ""}`}>
       {/* 1. Global Announcement Bar */}
-      
       <div className="top-bar">
-        <p>FREE SHIPPING ON ALL ORDERS OVER $50 • NEW COLLECTION 2026</p>
+        <p>✨ SPECIAL OFFER: GET 20% OFF ON YOUR FIRST ORDER • USE CODE: FIRST20 ✨</p>
       </div>
 
       <nav className="navbar container">
-        {/* 2. Logo - Perfectly aligned with Hero text gutter */}
+        {/* 2. Logo */}
         <div className="nav-left">
           <Link to="/home" className="brand-logo">
             <img src="/logoo.png" alt="HighGrip Logo" />
+            <span className="logo-text">HIGHGRIP</span>
           </Link>
         </div>
 
-        {/* 3. Center: Clean Typography Links */}
+        {/* 3. Center: Dynamic Navigation */}
         <ul className={`nav-links ${isMobileMenuOpen ? "active" : ""}`}>
-          <li><Link to="/home" className="nav-item">Home</Link></li>
-          <li><Link to="/about" className="nav-item">About</Link></li>
+          <li>
+            <Link to="/home" className="nav-item">
+              <span className="nav-icon-small">🏠</span> Home
+            </Link>
+          </li>
           <li className="dropdown">
-            <Link to="/home" className="nav-item">Our Products <span className="dropdown-caret">▼</span></Link>
+            <span className="nav-item">
+              <span className="nav-icon-small">🛡️</span> Products <FaChevronDown className="dropdown-caret" />
+            </span>
             <ul className="dropdown-menu">
-              {categories.map(cat => (
+              {Array.isArray(categories) && categories.map(cat => (
                 <li key={cat._id}>
                   <Link to={`/category/${cat.name}`} className="dropdown-item">
-                    {cat.name}
+                    <span className="item-dot"></span> {cat.name}
                   </Link>
                 </li>
               ))}
             </ul>
           </li>
-          <li><Link to="/customer-service" className="nav-item">FAQ</Link></li>
-          <li><Link to="/contact" className="nav-item">Contact Us</Link></li>
+          <li>
+            <Link to="/about" className="nav-item">
+              <span className="nav-icon-small">📖</span> About
+            </Link>
+          </li>
+          <li>
+            <Link to="/customer-service" className="nav-item">
+              <span className="nav-icon-small">💬</span> FAQ
+            </Link>
+          </li>
+          <li>
+            <Link to="/contact" className="nav-item">
+              <span className="nav-icon-small">📞</span> Contact Us
+            </Link>
+          </li>
         </ul>
 
-        {/* 4. Right: High-End Icon Set */}
+        {/* 4. Right: Search & Utilities */}
         <div className="nav-right">
-          <div className={`search-wrapper ${isSearchOpen ? "open" : ""}`}>
-            <input
-              type="text"
-              placeholder="Search our collection..."
-              onChange={(e) => onSearch && onSearch(e.target.value)}
-            />
-            <FaSearch className="nav-icon-svg" onClick={() => setIsSearchOpen(!isSearchOpen)} />
+          {/* Enhanced Search Bar */}
+          <div className={`search-container ${isSearchOpen ? "expanded" : ""}`}>
+            <div className="search-box">
+              <FaSearch className="search-trigger" onClick={() => setIsSearchOpen(!isSearchOpen)} />
+              <input
+                type="text"
+                className="search-input"
+                placeholder="Search products..."
+                onChange={(e) => onSearch && onSearch(e.target.value)}
+              />
+            </div>
           </div>
 
-          <Link to="/wishlist" className="nav-icon">
-            <FaHeart />
-            {wishlist.length > 0 && <span className="badge">{wishlist.length}</span>}
-          </Link>
+          <div className="divider"></div>
 
-          <Link to="/cart" className="nav-icon">
-            <FaShoppingCart />
-            {cart.length > 0 && (
-              <span className="badge">{cart.reduce((sum, i) => sum + i.qty, 0)}</span>
-            )}
-          </Link>
+          <div className="utility-icons">
+            <Link to="/wishlist" className="utility-btn wish">
+              <FaHeart />
+              {wishlist.length > 0 && <span className="u-badge">{wishlist.length}</span>}
+            </Link>
 
-          <div className="user-utility">
-            {user ? (
-              <>
-                <Link to="/profile" className="nav-icon"><FaUser /></Link>
-                <button onClick={handleLogout} className="minimal-logout">Logout</button>
-              </>
-            ) : (
-              <button onClick={() => navigate("/auth")} className="minimal-logout">Login/Signup</button>
-            )}
+            <Link to="/cart" className="utility-btn cart">
+              <FaShoppingCart />
+              {cart.length > 0 && (
+                <span className="u-badge">{cart.reduce((sum, i) => sum + i.qty, 0)}</span>
+              )}
+            </Link>
+
+            <div className="user-dropdown-container">
+              {user ? (
+                <div className="user-profile-trigger">
+                  <Link to="/profile" className="utility-btn profile">
+                    <FaUser />
+                  </Link>
+                  <div className="user-mini-menu">
+                    <p className="welcome-username">Hi, {user.name ? user.name.split(' ')[0] : 'User'}</p>
+                    <Link to="/orders">My Orders</Link>
+                    <Link to="/profile">Settings</Link>
+                    <button onClick={handleLogout} className="logout-btn">Sign Out</button>
+                  </div>
+                </div>
+              ) : (
+                <button onClick={() => navigate("/auth")} className="login-pill">
+                  Sign In
+                </button>
+              )}
+            </div>
           </div>
 
           <div className="hamburger" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>

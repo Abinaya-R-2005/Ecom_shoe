@@ -4,6 +4,8 @@
 .contact-page {
   font-family: "Segoe UI", sans-serif;
   color: #222;
+  padding-top: 130px;
+  /* Space for the fixed header */
 }
 
 /* Login Modal Overlay */

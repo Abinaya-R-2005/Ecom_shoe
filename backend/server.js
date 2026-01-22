@@ -202,7 +202,7 @@ app.post("/support", upload.single("image"), async (req, res) => {
       chat = await Chat.create({
         userEmail,
         userName,
-        subject: message.substring(0, 50) + (message.length > 50 ? "..." : ""),
+        subject: (message || "").substring(0, 50) + ((message || "").length > 50 ? "..." : ""),
         messages: [newMessage],
         lastUpdated: new Date()
       });
@@ -291,8 +291,8 @@ app.get("/support/admin", verifyAdmin, async (req, res) => {
   }
 });
 
-// ADMIN REPLY / SEND MESSAGE
-app.put("/support/:id/message", verifyAdmin, upload.single("image"), async (req, res) => {
+// USER OR ADMIN SEND MESSAGE
+app.put("/support/:id/message", upload.single("image"), async (req, res) => {
   try {
     const { sender, text } = req.body;
     const newMessage = {
@@ -327,8 +327,8 @@ app.delete("/admin/support/:id", verifyAdmin, async (req, res) => {
   }
 });
 
-/* ================= SERVER ================= */
-app.listen(5000, () => console.log("Server running on port 5000"));
+// (Moved app.listen to the end)
+
 
 // SIGNUP
 app.post("/signup", async (req, res) => {
@@ -479,8 +479,18 @@ app.get("/admin/orders", verifyAdmin, async (req, res) => {
 
 
 app.put("/admin/orders/:id", verifyAdmin, async (req, res) => {
-  await Order.findByIdAndUpdate(req.params.id, { status: req.body.status });
-  res.json({ message: "Status updated" });
+  const order = await Order.findByIdAndUpdate(req.params.id, { status: req.body.status }, { new: true });
+  res.json({ message: "Status updated", order });
+});
+
+// ✅ USER ORDERS STATUS UPDATE (FOR DEMO/TESTING PURPOSE)
+app.put("/orders/:id/status", async (req, res) => {
+  try {
+    const order = await Order.findByIdAndUpdate(req.params.id, { status: req.body.status }, { new: true });
+    res.json({ message: "Status updated", order });
+  } catch (err) {
+    res.status(500).json({ message: "Failed to update status" });
+  }
 });
 // UPDATE PRODUCT (ADMIN)
 app.put(
@@ -555,56 +565,8 @@ app.get("/orders/:email", async (req, res) => {
   res.json(await Order.find({ userEmail: req.params.email }));
 });
 
-/* ================= SUPPORT ================= */
+// (Removed duplicate support routes as they conflicted with new conversation-based Chat routes)
 
-// SUBMIT SUPPORT REQUEST
-app.post("/support", upload.single("image"), async (req, res) => {
-  try {
-    const { userEmail, userName, message } = req.body;
-    const support = await Support.create({
-      userEmail,
-      userName,
-      message,
-      image: req.file ? `/uploads/${req.file.filename}` : "",
-    });
-    res.json({ message: "Support request submitted", support });
-  } catch (err) {
-    res.status(500).json({ message: "Failed to submit request" });
-  }
-});
-
-// GET SUPPORT REQUESTS (ADMIN)
-app.get("/admin/support", verifyAdmin, async (req, res) => {
-  try {
-    const requests = await Support.find().sort({ createdAt: -1 });
-    res.json(requests);
-  } catch (err) {
-    res.status(500).json({ message: "Failed to fetch support requests" });
-  }
-});
-
-// ADMIN REPLY
-app.put("/admin/support/:id/reply", verifyAdmin, async (req, res) => {
-  try {
-    await Support.findByIdAndUpdate(req.params.id, {
-      reply: req.body.reply,
-      replyAt: new Date(),
-    });
-    res.json({ message: "Reply sent" });
-  } catch (err) {
-    res.status(500).json({ message: "Failed to send reply" });
-  }
-});
-
-// GET USER SUPPORT HISTORY
-app.get("/support/history/:email", async (req, res) => {
-  try {
-    const history = await Support.find({ userEmail: req.params.email }).sort({ createdAt: -1 });
-    res.json(history);
-  } catch (err) {
-    res.status(500).json({ message: "Failed to fetch history" });
-  }
-});
 
 /* ================= REVIEWS ================= */
 
@@ -729,4 +691,4 @@ app.post("/cart/update-qty", async (req, res) => {
 });
 
 /* ================= SERVER ================= */
-
+app.listen(5000, "0.0.0.0", () => console.log("Server running on port 5000"));

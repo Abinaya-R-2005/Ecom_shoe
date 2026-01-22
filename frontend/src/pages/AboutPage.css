@@ -13,6 +13,8 @@
   font-family: 'Work Sans', sans-serif;
   color: var(--black);
   overflow-x: hidden;
+  padding-top: 130px;
+  /* Space for the fixed header */
 }
 
 /* --- HERO SPLIT --- */
@@ -56,7 +58,7 @@
 
 .cta-main {
   background: #c71585;
- 
+
   border: none;
   padding: 18px 35px;
   display: flex;
@@ -112,8 +114,13 @@
 }
 
 @keyframes scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 /* --- VISION GRID --- */
@@ -138,12 +145,18 @@
 .vision-card:hover {
   border-color: var(--pink);
   transform: translateY(-15px);
-  box-shadow: 0 30px 60px rgba(0,0,0,0.05);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.05);
 }
 
-.vision-card.offset { margin-top: 40px; }
+.vision-card.offset {
+  margin-top: 40px;
+}
 
-.v-icon { font-size: 40px; color: var(--pink); margin-bottom: 30px; }
+.v-icon {
+  font-size: 40px;
+  color: var(--pink);
+  margin-bottom: 30px;
+}
 
 /* --- DEPTH SECTION --- */
 .depth-section {
@@ -156,6 +169,7 @@
   gap: 80px;
   align-items: center;
 }
+
 /* Update these specific sections in your AboutPage.css */
 /* ... Keep your existing Hero and Marquee CSS ... */
 
@@ -167,9 +181,11 @@
 
 .depth-content {
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr; /* Gives text more room */
+  grid-template-columns: 1.2fr 0.8fr;
+  /* Gives text more room */
   gap: 60px;
-  align-items: center; /* Vertically centers the text and the image */
+  align-items: center;
+  /* Vertically centers the text and the image */
 }
 
 .depth-title {
@@ -190,14 +206,16 @@
 /* --- IMAGE SIZE REDUCTION --- */
 .depth-image-container {
   display: flex;
-  justify-content: center; /* Centers image horizontally in its column */
+  justify-content: center;
+  /* Centers image horizontally in its column */
   align-items: center;
 }
 
 .depth-image-box {
   position: relative;
   width: 100%;
-  max-width: 380px; /* Constrains the width of about.png */
+  max-width: 380px;
+  /* Constrains the width of about.png */
   margin: 0 auto;
 }
 
@@ -206,14 +224,15 @@
   height: auto;
   border-radius: 12px;
   display: block;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   filter: brightness(0.98);
 }
 
 .floating-badge {
   position: absolute;
   bottom: -15px;
-  right: -15px; /* Moved to right for better balance with small image */
+  right: -15px;
+  /* Moved to right for better balance with small image */
   background: var(--pink);
   color: white;
   padding: 10px 20px;
@@ -242,7 +261,7 @@
   background: #fff;
   border-left-color: var(--pink);
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
 
 .depth-col h4 {
@@ -262,12 +281,17 @@
     grid-template-columns: 1fr;
     text-align: center;
   }
+
   .depth-image-box {
     max-width: 300px;
     margin-top: 40px;
   }
-  .depth-intro { margin: 0 auto 40px auto; }
+
+  .depth-intro {
+    margin: 0 auto 40px auto;
+  }
 }
+
 .depth-intro {
   max-width: 600px;
   font-size: 17px;
@@ -278,7 +302,8 @@
 
 .depth-row {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Maintains a neat 2x2 grid for the 4 items */
+  grid-template-columns: 1fr 1fr;
+  /* Maintains a neat 2x2 grid for the 4 items */
   gap: 30px;
 }
 
@@ -310,17 +335,39 @@
 
 @media (max-width: 768px) {
   .depth-row {
-    grid-template-columns: 1fr; /* Stack on mobile */
+    grid-template-columns: 1fr;
+    /* Stack on mobile */
   }
 }
-.depth-title { font-family: 'Syncopate', sans-serif; font-size: 40px; margin-bottom: 50px; }
 
-.depth-row { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.depth-title {
+  font-family: 'Syncopate', sans-serif;
+  font-size: 40px;
+  margin-bottom: 50px;
+}
 
-.num { font-size: 12px; font-weight: 800; color: var(--pink); display: block; margin-bottom: 10px; }
+.depth-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
 
-.depth-image-box { position: relative; }
-.depth-image-box img { width: 100%; border-radius: 4px; }
+.num {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--pink);
+  display: block;
+  margin-bottom: 10px;
+}
+
+.depth-image-box {
+  position: relative;
+}
+
+.depth-image-box img {
+  width: 100%;
+  border-radius: 4px;
+}
 
 .floating-badge {
   position: absolute;
@@ -347,9 +394,22 @@
   color: #ddd;
 }
 
-.brand-signature { color: var(--pink); font-weight: 800; letter-spacing: 5px; }
+.brand-signature {
+  color: var(--pink);
+  font-weight: 800;
+  letter-spacing: 5px;
+}
 
 @media (max-width: 992px) {
-  .hero-split, .vision-layout, .depth-content, .depth-row { grid-template-columns: 1fr; }
-  .vision-card.offset { margin-top: 0; }
+
+  .hero-split,
+  .vision-layout,
+  .depth-content,
+  .depth-row {
+    grid-template-columns: 1fr;
+  }
+
+  .vision-card.offset {
+    margin-top: 0;
+  }
 }

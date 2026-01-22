@@ -1,0 +1,109 @@
+/* src/components/SidebarFilters.css */
+.sidebar-filters {
+    width: 280px;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+}
+
+.filter-section {
+    margin-bottom: 30px;
+}
+
+.filter-section h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 15px;
+}
+
+.filter-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: #4b5563;
+    transition: color 0.2s;
+}
+
+.filter-option:hover {
+    color: var(--primary-color);
+}
+
+.filter-option input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--primary-color);
+    cursor: pointer;
+}
+
+/* Price Range */
+.price-display {
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.range-slider {
+    width: 100%;
+    margin-bottom: 15px;
+    accent-color: var(--primary-color);
+}
+
+.price-ranges {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.price-range-link {
+    font-size: 0.9rem;
+    color: #6b7280;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.price-range-link:hover {
+    color: var(--primary-color);
+}
+
+/* Customer Review */
+.rating-filters {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.rating-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #4b5563;
+}
+
+.stars-row {
+    display: flex;
+    gap: 2px;
+    color: #fbbf24;
+}
+
+.rating-link:hover {
+    color: var(--primary-color);
+}
+
+@media (max-width: 1024px) {
+    .sidebar-filters {
+        width: 100%;
+        position: static;
+        margin-bottom: 30px;
+    }
+}
