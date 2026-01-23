@@ -51,12 +51,12 @@ const Contact = () => {
   };
   return (
     <div className="contact-page">
-<Header />
+      <Header />
 
       {/* Pink Banner */}
       <section className="contact-hero">
         <h1>Contact Us</h1>
-        
+
 
       </section>
 
@@ -117,54 +117,52 @@ const Contact = () => {
 
       </div>
 
-      {/* FOOTER */}
-      <footer className="contact-footer">
-        <div className="footer-cols">
-
-          <div>
-            <h3>HIGHGRIP</h3>
-            <p>
+      <footer className="footer-site">
+        <div className="footer-container">
+          <div className="footer-column brand-col">
+            <h4 className="footer-col-title">HIGHGRIP</h4>
+            <p className="footer-address">
               Lakshmi Textile, Shed no 9,<br />
               SIDCO colony, Madurai main road,<br />
-              Theni, Tamil Nadu, 625531<br/>
+              Theni, Tamil Nadu, 625531
             </p>
-            
           </div>
 
-          <div>
-            <h4>Quick Links</h4>
-            <ul>
-              <li>Home</li>
-              <li>About Us</li>
-              <li>Our Products</li>
-              <li>FAQ</li>
-              <li>Contact Us</li>
+          <div className="footer-column">
+            <h4 className="footer-col-title">QUICK LINKS</h4>
+            <ul className="footer-links">
+              <li><a href="/">Home</a></li>
+              <li><a href="/about">About Us</a></li>
+              <li><a href="/products">Our Products</a></li>
+              <li><a href="/customer-service">FAQ</a></li>
+              <li><a href="/contact">Contact Us</a></li>
             </ul>
           </div>
 
-          <div>
-            <h4>Products</h4>
-            <ul>
-              <li>Yoga Socks</li>
-              <li>Compression Sleeves</li>
-              <li>Thigh High Socks</li>
-              <li>Medical Stockings</li>
-              <li>Trampoline Socks</li>
-              <li>Ankle Grip Socks</li>
-              <li>Crawling Knee Pads</li>
+          <div className="footer-column">
+            <h4 className="footer-col-title">PRODUCTS</h4>
+            <ul className="footer-links">
+              <li><a href="/products/yoga">Yoga Socks</a></li>
+              <li><a href="/products/compression">Compression Sleeves</a></li>
+              <li><a href="/products/thigh-high">Thigh High Socks</a></li>
+              <li><a href="/products/medical">Medical Stockings</a></li>
+              <li><a href="/products/trampoline">Trampoline Socks</a></li>
+              <li><a href="/products/ankle">Ankle Grip Socks</a></li>
+              <li><a href="/products/knee-pads">Crawling Knee Pads</a></li>
             </ul>
           </div>
 
-          <div>
-            <h4>Get in Touch</h4>
-            <p>If you have any enquiries, please do not hesitate to contact us.</p>
+          <div className="footer-column">
+            <h4 className="footer-col-title">GET IN TOUCH</h4>
+            <p className="footer-contact-text">
+              If you have any enquiries, please do not hesitate to contact us.
+            </p>
           </div>
-
         </div>
 
-        <p className="copyright">
-          Copyright © 2025 by Highgripsox. All Rights Reserved.
-        </p>
+        <div className="footer-bottom">
+          <p>Copyright © 2026 by Highgripsox. All Rights Reserved.</p>
+        </div>
       </footer>
 
       {showLoginModal && (
