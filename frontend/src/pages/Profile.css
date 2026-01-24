@@ -2,9 +2,9 @@
 
 :root {
   /* Refined Palette */
-  --brand-green: #2E7D32;
-  --brand-green-dark: #1B5E20;
-  --brand-green-soft: #f0fdf4;
+  --brand-pink: #c71585;
+  --brand-pink-dark: #a01366;
+  --brand-pink-soft: #fff1f2;
   --accent-gold: #b45309;
   --ui-slate: #0f172a;
   --ui-gray: #64748b;
@@ -46,8 +46,8 @@
 }
 
 .pro-back-btn:hover {
-  border-color: var(--brand-green);
-  color: var(--brand-green);
+  border-color: var(--brand-pink);
+  color: var(--brand-pink);
   transform: translateX(-4px);
   box-shadow: var(--shadow-sm);
 }
@@ -111,7 +111,7 @@
   position: absolute;
   bottom: 0;
   right: 0;
-  background: var(--brand-green);
+  background: var(--brand-pink);
   color: white;
   border: 2px solid white;
   width: 34px;
@@ -166,8 +166,8 @@
 }
 
 .pro-nav-btn:hover {
-  background: var(--brand-green-soft);
-  color: var(--brand-green);
+  background: var(--brand-pink-soft);
+  color: var(--brand-pink);
 }
 
 .pro-logout-btn {
@@ -192,7 +192,7 @@
   align-items: center;
   gap: 15px;
   margin-bottom: 30px;
-  color: var(--brand-green);
+  color: var(--brand-pink);
 }
 
 .header-title h3 {
@@ -262,7 +262,7 @@
 }
 
 .pro-address-card strong {
-  color: var(--brand-green);
+  color: var(--brand-pink);
   text-transform: uppercase;
   font-size: 0.75rem;
   letter-spacing: 1px;
@@ -311,13 +311,13 @@
 .pro-form-card input:focus {
   background: white;
   outline: none;
-  border-color: var(--brand-green);
-  box-shadow: 0 0 0 4px var(--brand-green-soft);
+  border-color: var(--brand-pink);
+  box-shadow: 0 0 0 4px var(--brand-pink-soft);
 }
 
 .pro-pwd-btn,
 .pro-form-card button {
-  background: var(--brand-green);
+  background: var(--brand-pink);
   color: white;
   border: none;
   padding: 14px 30px;
@@ -328,8 +328,8 @@
 }
 
 .pro-pwd-btn:hover {
-  background: var(--brand-green-dark);
-  box-shadow: 0 8px 20px rgba(46, 125, 50, 0.2);
+  background: var(--brand-pink-dark);
+  box-shadow: 0 8px 20px rgba(199, 21, 133, 0.2);
 }
 
 .pro-empty-placeholder {
@@ -343,13 +343,27 @@
 
 /* --- RESPONSIVE --- */
 @media (max-width: 1024px) {
+  .pro-page-bg {
+    padding: 100px 5% 60px;
+  }
+
   .pro-container {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 30px;
   }
 
   .pro-sidebar {
     position: relative;
     top: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .pro-content-section {
+    padding: 25px 20px;
+  }
+
+  .pro-user-card {
+    padding: 30px 20px;
   }
 }

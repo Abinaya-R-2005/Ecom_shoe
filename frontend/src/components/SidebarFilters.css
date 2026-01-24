@@ -8,6 +8,7 @@
     height: fit-content;
     position: sticky;
     top: 100px;
+    transition: all 0.3s ease;
 }
 
 .filter-section {
@@ -100,10 +101,27 @@
     color: var(--primary-color);
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
     .sidebar-filters {
         width: 100%;
         position: static;
-        margin-bottom: 30px;
+        margin-bottom: 20px;
+        display: none;
+        /* Hide on mobile by default */
+        padding: 20px;
+    }
+
+    .sidebar-filters.mobile-active {
+        display: block;
+    }
+
+    .filter-section {
+        margin-bottom: 20px;
+        border-bottom: 1px solid #f1f5f9;
+        padding-bottom: 20px;
+    }
+
+    .filter-section:last-child {
+        border-bottom: none;
     }
 }

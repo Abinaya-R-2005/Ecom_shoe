@@ -2,12 +2,22 @@
   background: #fff;
   border-bottom: 1px solid #eee;
   padding: 10px 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.categories-section::-webkit-scrollbar {
+  display: none;
+  /* Chrome/Safari */
 }
 
 .categories-container {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 25px;
+  padding: 0 20px;
+  width: max-content;
 }
 
 .category-item-link {
@@ -15,16 +25,18 @@
   color: #333;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 8px;
   font-size: 14px;
-  font-weight: 500;
-  transition: color 0.3s;
+  font-weight: 600;
+  transition: all 0.3s;
+  white-space: nowrap;
 }
 
 .category-item-link:hover {
-  color: #2e7d32; /* Forest Green */
+  color: #c71585;
+  transform: translateY(-2px);
 }
 
 .cat-icon {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
 }

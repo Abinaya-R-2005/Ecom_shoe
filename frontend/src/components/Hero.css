@@ -16,8 +16,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-size: 100% 100%;
-  /* Direct fit as requested */
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0;
@@ -199,6 +198,11 @@
 
 /* Responsive */
 @media (max-width: 768px) {
+  .full-hero-carousel {
+    height: 65vh;
+    margin-top: 70px;
+  }
+
   .hero-title {
     font-size: 2rem;
   }
@@ -214,5 +218,26 @@
 
   .hero-desc {
     margin: 0 auto 30px;
+    font-size: 0.95rem;
+  }
+
+  .shop-btn {
+    padding: 14px 30px;
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .full-hero-carousel {
+    height: 60vh;
+  }
+
+  .hero-title {
+    font-size: 1.5rem;
+  }
+
+  .hero-badge {
+    letter-spacing: 3px;
+    font-size: 0.75rem;
   }
 }

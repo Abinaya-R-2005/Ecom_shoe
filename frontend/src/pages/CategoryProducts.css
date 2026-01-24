@@ -27,38 +27,33 @@
 /* ✅ FIXED CLASS NAME */
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 20px;
-}
-
-.product-card {
-  background: #fff;
-  border-radius: 10px;
-  padding: 15px;
-  text-align: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.product-card img {
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
-  border-radius: 8px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
 }
 
 /* 📱 Mobile */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .product-grid {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 15px;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
   }
 
   .category-page {
-    padding: 150px 15px 15px 15px;
-    /* Maintain space for header on mobile */
+    padding: 110px 20px 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
   }
 
-  .product-card img {
-    height: 140px;
+  .category-page {
+    padding: 100px 15px 30px;
+  }
+
+  .category-title {
+    font-size: 1.2rem;
   }
 }

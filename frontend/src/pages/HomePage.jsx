@@ -91,6 +91,8 @@ export default function Home() {
     setFilteredProducts(result);
   }, [filters, searchTerm, allProducts]);
 
+  const [showMobileFilters, setShowMobileFilters] = useState(false);
+
   return (
     <div className="home">
       <Header onSearch={handleSearch} />
@@ -98,27 +100,33 @@ export default function Home() {
       <CollectionGrid />
 
       {/* Main Shop Section */}
-      <div id="shop-section" className="shop-layout container" style={{ display: 'flex', gap: '40px', padding: '40px 20px', maxWidth: '1440px', margin: '0 auto' }}>
-        <SidebarFilters filters={filters} onFilterChange={handleFilterChange} />
+      <div id="shop-section" className="shop-layout container">
+        <div className="mobile-filter-toggle">
+          <button onClick={() => setShowMobileFilters(!showMobileFilters)}>
+            {showMobileFilters ? "Hide Filters" : "Show Filters"}
+          </button>
+        </div>
 
-        <div className="shop-main" style={{ flex: 1 }}>
-          <section className="collection-compact" style={{ marginBottom: '40px' }}>
-            <p style={{ color: '#64748b', fontWeight: '600' }}>{filteredProducts.length} items found</p>
+        <SidebarFilters
+          filters={filters}
+          onFilterChange={handleFilterChange}
+          className={showMobileFilters ? "mobile-active" : ""}
+        />
+
+        <div className="shop-main">
+          <section className="collection-compact">
+            <p className="item-count">{filteredProducts.length} items found</p>
           </section>
 
           <section className="products-grid-container">
             {loading ? (
               <p>Loading products...</p>
             ) : filteredProducts.length === 0 ? (
-              <div className="no-results" style={{ textAlign: 'center', padding: '100px 0' }}>
+              <div className="no-results">
                 <h3>No products match your filters</h3>
               </div>
             ) : (
-              <div className="products-view" style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-                gap: '30px'
-              }}>
+              <div className="products-view">
                 {filteredProducts.map((product) => (
                   <ProductCard key={product._id} product={product} />
                 ))}

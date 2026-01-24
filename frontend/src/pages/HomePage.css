@@ -322,6 +322,61 @@
   transform: rotate(-2deg) scale(1.1);
 }
 
+/* --- SHOP LAYOUT --- */
+.shop-layout {
+  display: flex;
+  gap: 40px;
+  padding: 40px 20px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.shop-main {
+  flex: 1;
+}
+
+.collection-compact {
+  margin-bottom: 40px;
+}
+
+.item-count {
+  color: #64748b;
+  font-weight: 600;
+  margin: 0;
+}
+
+.products-view {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.no-results {
+  text-align: center;
+  padding: 100px 0;
+}
+
+/* Mobile Filter Toggle */
+.mobile-filter-toggle {
+  display: none;
+  margin-bottom: 20px;
+}
+
+.mobile-filter-toggle button {
+  width: 100%;
+  padding: 12px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  font-weight: 700;
+  color: #1e293b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
 /* ANIMATIONS */
 @keyframes pulse-ring {
   0% {
@@ -338,24 +393,26 @@
 }
 
 /* RESPONSIVENESS */
-@media (max-width: 1024px) {
-  .motion-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+@media (max-width: 1200px) {
+  .shop-layout {
+    flex-direction: column;
+    padding: 20px;
+    gap: 10px;
   }
 
-  .parallax-card {
-    height: auto;
-    min-height: 380px;
-  }
-
-  .motion-title {
-    font-size: 3rem;
+  .mobile-filter-toggle {
+    display: block;
   }
 
   .footer-container {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 50px 20px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .motion-title {
+    font-size: 3rem;
   }
 }
 
@@ -366,33 +423,24 @@
 
   .motion-title {
     font-size: 2.2rem;
-    /* Significantly smaller for mobile */
     line-height: 1.2;
     margin-top: 10px;
-    word-wrap: break-word;
-    /* Ensure clear breaking */
   }
 
   .motion-grid {
     grid-template-columns: 1fr;
-    /* Stack cards */
     gap: 40px;
   }
 
   .parallax-card {
     height: auto;
     perspective: none;
-    /* Disable 3D on mobile */
   }
 
   .card-inner-layer {
     transform: none !important;
     padding: 30px;
     height: auto;
-  }
-
-  .parallax-card:hover .card-inner-layer {
-    transform: none !important;
   }
 
   .testimonial-para {
@@ -421,9 +469,17 @@
 }
 
 @media (max-width: 480px) {
+  .products-view {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .products-view>* {
+    font-size: 0.85rem;
+  }
+
   .motion-title {
     font-size: 1.8rem;
-    /* Even smaller for very small screens */
   }
 
   .section-intro {

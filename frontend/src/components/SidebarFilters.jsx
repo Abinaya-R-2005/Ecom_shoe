@@ -2,7 +2,7 @@ import React from "react";
 import { FaStar } from "react-icons/fa";
 import "./SidebarFilters.css";
 
-const SidebarFilters = ({ filters, onFilterChange }) => {
+const SidebarFilters = ({ filters, onFilterChange, className }) => {
     const handleCheckboxChange = (category, value) => {
         const currentValues = filters[category] || [];
         const newValues = currentValues.includes(value)
@@ -20,7 +20,7 @@ const SidebarFilters = ({ filters, onFilterChange }) => {
     };
 
     return (
-        <aside className="sidebar-filters">
+        <aside className={`sidebar-filters ${className || ""}`}>
             {/* 1. Deals & Discounts */}
             <div className="filter-section">
                 <h3>Deals & Discounts</h3>

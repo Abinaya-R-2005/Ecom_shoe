@@ -456,6 +456,24 @@
     }
 }
 
+@media (max-width: 480px) {
+    .orders-container {
+        padding: 100px 15px 40px;
+    }
+
+    .orders-heading {
+        font-size: 1.5rem;
+    }
+
+    .product-name {
+        font-size: 1rem;
+    }
+
+    .order-card {
+        padding: 15px;
+    }
+}
+
 /* Back to Home Button Styling */
 /* Premium Classic eCommerce Back Button */
 .back-home-btn {
