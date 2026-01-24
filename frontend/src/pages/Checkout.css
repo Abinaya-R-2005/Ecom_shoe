@@ -338,91 +338,51 @@
 
 /* Mobile Responsiveness */
 /* Mobile Responsiveness */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     .checkout-page {
-        padding: 15px;
-    }
-
-    .checkout-title {
-        font-size: 24px;
-        margin-bottom: 25px;
-        text-align: center;
+        padding: 15px 10px;
     }
 
     .checkout-grid {
         grid-template-columns: 1fr;
-        gap: 25px;
+        gap: 30px;
     }
 
     .checkout-card {
         padding: 20px;
-        border-radius: 16px;
     }
 
-    .summary-card {
-        position: static;
-        margin-top: 10px;
-        border-radius: 16px;
-        padding: 20px;
-    }
-
-    /* Input Grid */
+    /* Stack inputs on small screens */
     .input-grid {
         grid-template-columns: 1fr;
-        gap: 15px;
     }
 
     .field.full {
         grid-column: span 1;
     }
 
-    /* Method Options */
+    /* Method Selection Mobile */
     .method-option {
-        padding: 15px;
-        flex-direction: row;
-        /* Keep row direction but handle wrapping */
-        flex-wrap: wrap;
-        gap: 12px;
+        flex-direction: column;
         align-items: flex-start;
-    }
-
-    .custom-radio {
-        margin-right: 12px;
-        margin-top: 2px;
-        /* Align with text top */
-    }
-
-    .method-details {
-        flex: 1 1 auto;
-        /* Allow it to grow and shrink */
-        min-width: 200px;
-        /* Force wrapping if too narrow */
-    }
-
-    .method-title {
-        font-size: 14px;
-        display: block;
-        /* Stack title and time if needed */
-    }
-
-    .method-time {
-        margin-left: 0;
-        display: block;
-        margin-top: 4px;
-        font-size: 12px;
+        gap: 10px;
     }
 
     .method-price {
         margin-left: 0;
-        min-width: fit-content;
-        font-size: 14px;
+        margin-top: 5px;
     }
 
     .card-icons {
         margin-left: 0;
-        margin-top: 8px;
-        width: 100%;
-        justify-content: flex-start;
+        margin-top: 10px;
+    }
+
+    /* Sticky Summary on Mobile? No, put it at bottom or use fixed button */
+    .summary-card {
+        position: static;
+        order: 2;
+        /* Ensure summary is below details if grid order is default */
     }
 
     .place-order-btn {
@@ -431,14 +391,14 @@
         left: 20px;
         right: 20px;
         width: calc(100% - 40px);
-        z-index: 50;
-        margin-top: 0;
-        box-shadow: 0 4px 20px rgba(194, 24, 139, 0.4);
+        z-index: 100;
+        box-shadow: 0 4px 25px rgba(194, 24, 139, 0.4);
+        margin: 0;
         padding: 16px;
     }
 
-    /* Add padding to bottom of page so button doesn't cover content */
     .checkout-container {
-        padding-bottom: 80px;
+        padding-bottom: 90px;
+        /* Space for fixed button */
     }
 }

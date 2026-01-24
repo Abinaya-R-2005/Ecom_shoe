@@ -53,11 +53,12 @@ const Contact = () => {
     <div className="contact-page">
       <Header />
 
-      {/* Pink Banner */}
+      {/* Pink Banner - Now Transparent/Animated Text */}
       <section className="contact-hero">
         <h1>Contact Us</h1>
-
-
+        <p>
+          We're here to help you find your perfect fit. Reach out to us for any inquiries about our high-grip collection.
+        </p>
       </section>
 
       {/* CONTACT INFO SECTION */}
@@ -67,7 +68,9 @@ const Contact = () => {
         <div className="contact-info">
 
           <div className="info-card">
-            <MapPin />
+            <div className="icon-wrapper">
+              <MapPin />
+            </div>
             <div>
               <h4>Address:</h4>
               <p>
@@ -79,24 +82,30 @@ const Contact = () => {
             </div>
           </div>
 
-          <div className="info-card">
-            <Phone />
+          <a href="tel:+918606817667" className="info-card" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <div className="icon-wrapper">
+              <Phone />
+            </div>
             <div>
               <h4>Call Us:</h4>
               <p>+91 86068 17667</p>
             </div>
-          </div>
+          </a>
 
-          <div className="info-card">
-            <Mail />
+          <a href="mailto:info@highgripsox.com" className="info-card" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <div className="icon-wrapper">
+              <Mail />
+            </div>
             <div>
               <h4>Email:</h4>
               <p>info@highgripsox.com</p>
             </div>
-          </div>
+          </a>
 
           <div className="info-card">
-            <span className="globe">🌍</span>
+            <div className="icon-wrapper">
+              <span style={{ fontSize: '24px' }}>🌍</span>
+            </div>
             <div>
               <h4>Social:</h4>
               <div className="social-icons">
@@ -111,8 +120,8 @@ const Contact = () => {
         {/* RIGHT BLUE CARD */}
         <div className="contact-cta">
           <h2>Got questions or need help choosing the right grip?</h2>
-          <p>We’d love to hear from you!</p>
-          <button>Call Us</button>
+          <p>We’d love to hear from you! Our team is ready to assist you.</p>
+          <a href="tel:+918606817667" className="call-us-btn">Call Us</a>
         </div>
 
       </div>

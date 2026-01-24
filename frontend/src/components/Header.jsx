@@ -143,10 +143,43 @@ const Header = ({ onSearch }) => {
           </div>
 
           <div className="hamburger" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-            {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
+            {isMobileMenuOpen ? <div /> : <FaBars />}
+            {/* FaTimes is handled inside the drawer or just rely on overlay/toggle */}
           </div>
         </div>
       </nav>
+
+      {/* Mobile Menu Overlay */}
+      {isMobileMenuOpen && (
+        <div
+          className="mobile-overlay"
+          onClick={() => setIsMobileMenuOpen(false)}
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            background: 'rgba(0,0,0,0.5)',
+            zIndex: 1999
+          }}
+        />
+      )}
+
+      {/* Close Button inside Drawer */}
+      {isMobileMenuOpen && (
+        <div className="mobile-close-btn" onClick={() => setIsMobileMenuOpen(false)} style={{
+          position: 'fixed',
+          top: '25px',
+          right: '25px',
+          zIndex: 2101,
+          fontSize: '1.5rem',
+          color: '#111',
+          cursor: 'pointer'
+        }}>
+          <FaTimes />
+        </div>
+      )}
     </header>
   );
 };

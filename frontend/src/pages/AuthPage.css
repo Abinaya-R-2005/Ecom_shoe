@@ -1,13 +1,18 @@
 :root {
-  --primary-color: #ff4081; /* Bright Pink Accent */
-  --primary-hover: #c71585; /* Darker Pink for hover */
-  --text-dark: #1f2937;     /* Dark text */
-  --text-gray: #6b7280;     /* Gray text */
-  --bg-light: #f9fafb;      /* Light background */
+  --primary-color: #ff4081;
+  /* Bright Pink Accent */
+  --primary-hover: #c71585;
+  /* Darker Pink for hover */
+  --text-dark: #1f2937;
+  /* Dark text */
+  --text-gray: #6b7280;
+  /* Gray text */
+  --bg-light: #f9fafb;
+  /* Light background */
   --white: #ffffff;
   --glass-border: rgba(255, 255, 255, 0.3);
   --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05),
-            0 8px 10px -6px rgba(0, 0, 0, 0.05);
+    0 8px 10px -6px rgba(0, 0, 0, 0.05);
 }
 
 
@@ -75,7 +80,7 @@
   font-size: 1.8rem;
   font-weight: 700;
   background: linear-gradient(135deg, #406dff, #c71585);
- -webkit-background-clip: text;
+  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin: 0 0 5px 0;
 }
@@ -98,7 +103,7 @@
 .brand-name {
   font-size: 2rem;
   font-weight: 800;
-   background: linear-gradient(135deg, #c71585,#406dff);
+  background: linear-gradient(135deg, #c71585, #406dff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin: 0;
@@ -220,7 +225,7 @@
 .input-icon {
   position: absolute;
   left: 15px;
-  color:  #c71585;
+  color: #c71585;
   font-size: 1.1rem;
 }
 
@@ -297,8 +302,10 @@
   flex: 1;
   padding: 10px;
   border: none;
-  background: var(--white);       /* Inactive background */
-  color: #c71585;   /* Inactive text = pink */
+  background: var(--white);
+  /* Inactive background */
+  color: #c71585;
+  /* Inactive text = pink */
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
@@ -307,14 +314,17 @@
 }
 
 .auth-tab.active {
-  background:  #c71585; /* Active background = pink */
-  color: var(--white);              /* Active text = white */
+  background: #c71585;
+  /* Active background = pink */
+  color: var(--white);
+  /* Active text = white */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .auth-tab:hover {
-  background: rgba(211, 13, 79, 0.1); /* light pink on hover */
-  color:  #c71585;
+  background: rgba(211, 13, 79, 0.1);
+  /* light pink on hover */
+  color: #c71585;
 }
 
 .submit-btn {
@@ -397,10 +407,42 @@
 
 /* Responsive */
 @media (max-width: 900px) {
+  .auth-content {
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+    padding: 20px;
+  }
+
   .auth-branding {
     display: none;
+    /* Hide branding on mobile to focus on login */
   }
-  .auth-content {
+
+  .auth-form-card {
+    max-width: 100%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  }
+
+  .auth-container {
+    padding: 15px;
     justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-tabs {
+    flex-direction: row;
+    /* Keep tabs side-by-side */
+  }
+
+  .form-actions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .social-buttons {
+    flex-direction: column;
   }
 }
