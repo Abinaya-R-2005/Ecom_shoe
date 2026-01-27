@@ -5,6 +5,7 @@ const bcrypt = require("bcryptjs");
 const cors = require("cors");
 const multer = require("multer");
 const path = require("path");
+const fs = require("fs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
@@ -483,6 +484,36 @@ app.put("/admin/orders/:id", verifyAdmin, async (req, res) => {
   res.json({ message: "Status updated", order });
 });
 
+// ⭐ NEW: Optimized Admin Stats Route
+app.get("/admin/dashboard-stats", verifyAdmin, async (req, res) => {
+  try {
+    const [products, ordersData, categories] = await Promise.all([
+      Product.find().lean(),
+      Order.find().sort({ createdAt: -1 }).lean(),
+      Category.find().lean()
+    ]);
+
+    const activeDiscounts = products.filter(
+      (p) =>
+        p.discountPercent > 0 &&
+        new Date(p.discountStart) <= new Date() &&
+        new Date(p.discountEnd) >= new Date()
+    );
+
+    res.json({
+      stats: {
+        products: products.length,
+        orders: ordersData.length,
+        discounts: activeDiscounts.length,
+        categories: categories.length,
+      },
+      recentOrders: ordersData.slice(0, 5)
+    });
+  } catch (err) {
+    res.status(500).json({ message: "Failed to fetch dashboard data" });
+  }
+});
+
 // ✅ USER ORDERS STATUS UPDATE (FOR DEMO/TESTING PURPOSE)
 app.put("/orders/:id/status", async (req, res) => {
   try {
@@ -492,7 +523,6 @@ app.put("/orders/:id/status", async (req, res) => {
     res.status(500).json({ message: "Failed to update status" });
   }
 });
-// UPDATE PRODUCT (ADMIN)
 app.put(
   "/admin/product/:id",
   verifyAdmin,
@@ -502,9 +532,19 @@ app.put(
   ]),
   async (req, res) => {
     try {
+      const product = await Product.findById(req.params.id);
+      if (!product) return res.status(404).json({ message: "Product not found" });
+
       const updateData = { ...req.body };
 
+      // Handle main image update and deletion of old one
       if (req.files?.image) {
+        if (product.image) {
+          const oldPath = path.join(__dirname, product.image);
+          if (fs.existsSync(oldPath)) {
+            fs.unlinkSync(oldPath);
+          }
+        }
         updateData.image = `/uploads/${req.files.image[0].filename}`;
       }
 
@@ -512,6 +552,15 @@ app.put(
         updateData.images = req.files.galleryImages.map(
           (f) => `/uploads/${f.filename}`
         );
+      }
+
+      // Handle direct sales price to discount percent conversion if salesPrice is provided
+      if (req.body.salesPrice && req.body.price) {
+        const originalPrice = parseFloat(req.body.price);
+        const salesPrice = parseFloat(req.body.salesPrice);
+        if (originalPrice > 0) {
+          updateData.discountPercent = ((originalPrice - salesPrice) / originalPrice) * 100;
+        }
       }
 
       const updatedProduct = await Product.findByIdAndUpdate(
@@ -522,6 +571,7 @@ app.put(
 
       res.json(updatedProduct);
     } catch (err) {
+      console.error(err);
       res.status(500).json({ message: "Failed to update product" });
     }
   }
@@ -563,6 +613,20 @@ app.post("/orders", async (req, res) => {
 
 app.get("/orders/:email", async (req, res) => {
   res.json(await Order.find({ userEmail: req.params.email }));
+});
+
+// ⭐ NEW: Public Recent Orders for Home Page proof
+app.get("/orders/public/recent", async (req, res) => {
+  try {
+    const orders = await Order.find()
+      .sort({ createdAt: -1 })
+      .limit(6)
+      .select("productName userName createdAt totalAmount")
+      .lean();
+    res.json(orders);
+  } catch (err) {
+    res.status(500).json({ message: "Error loading recent orders" });
+  }
 });
 
 // (Removed duplicate support routes as they conflicted with new conversation-based Chat routes)

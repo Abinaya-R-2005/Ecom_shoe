@@ -1,9 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { FaCommentDots, FaTimes, FaPaperPlane } from "react-icons/fa";
 import "./FloatingChat.css";
 
 const FloatingChat = () => {
+  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+
+  if (location.pathname.startsWith("/admin")) {
+    return null;
+  }
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
