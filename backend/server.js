@@ -85,6 +85,9 @@ const productSchema = new mongoose.Schema({
   ratingCount: { type: Number, default: 0 },
 });
 
+// Add indexes for dashboard query performance
+productSchema.index({ discountPercent: 1, discountStart: 1, discountEnd: 1 });
+
 const Product = mongoose.model("Product", productSchema);
 
 // ORDER
@@ -487,27 +490,26 @@ app.put("/admin/orders/:id", verifyAdmin, async (req, res) => {
 // ⭐ NEW: Optimized Admin Stats Route
 app.get("/admin/dashboard-stats", verifyAdmin, async (req, res) => {
   try {
-    const [products, ordersData, categories] = await Promise.all([
-      Product.find().lean(),
-      Order.find().sort({ createdAt: -1 }).lean(),
-      Category.find().lean()
+    const [productsCount, ordersCount, categoriesCount, recentOrders, activeDiscountsCount] = await Promise.all([
+      Product.countDocuments(),
+      Order.countDocuments(),
+      Category.countDocuments(),
+      Order.find().sort({ createdAt: -1 }).limit(5).lean(),
+      Product.countDocuments({
+        discountPercent: { $gt: 0 },
+        discountStart: { $lte: new Date() },
+        discountEnd: { $gte: new Date() }
+      })
     ]);
-
-    const activeDiscounts = products.filter(
-      (p) =>
-        p.discountPercent > 0 &&
-        new Date(p.discountStart) <= new Date() &&
-        new Date(p.discountEnd) >= new Date()
-    );
 
     res.json({
       stats: {
-        products: products.length,
-        orders: ordersData.length,
-        discounts: activeDiscounts.length,
-        categories: categories.length,
+        products: productsCount,
+        orders: ordersCount,
+        discounts: activeDiscountsCount,
+        categories: categoriesCount,
       },
-      recentOrders: ordersData.slice(0, 5)
+      recentOrders: recentOrders
     });
   } catch (err) {
     res.status(500).json({ message: "Failed to fetch dashboard data" });

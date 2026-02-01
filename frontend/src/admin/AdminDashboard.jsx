@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Package,
@@ -11,9 +11,13 @@ import {
 import AdminLayout from "./AdminLayout";
 import "./AdminDashboard.css";
 
+const CACHE_KEY = "admin_dashboard_cache";
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes cache
+
 const AdminDashboard = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
+  const authCheckDone = useRef(false);
 
   const [stats, setStats] = useState({
     products: 0,
@@ -26,16 +30,54 @@ const AdminDashboard = () => {
   const [recentOrders, setRecentOrders] = useState([]);
 
   useEffect(() => {
+    // Skip auth check if already done
+    if (authCheckDone.current) return;
+    authCheckDone.current = true;
+
     const user = JSON.parse(localStorage.getItem("user") || "null");
     if (!token || !user || !user.isAdmin) {
       navigate("/login");
       return;
     }
+    
     fetchStats();
   }, [navigate, token]);
 
-  const fetchStats = async () => {
+  const getCachedStats = () => {
+    const cached = localStorage.getItem(CACHE_KEY);
+    if (!cached) return null;
+    
+    const { data, timestamp } = JSON.parse(cached);
+    if (Date.now() - timestamp > CACHE_DURATION) {
+      localStorage.removeItem(CACHE_KEY);
+      return null;
+    }
+    return data;
+  };
+
+  const setCachedStats = (data) => {
+    localStorage.setItem(
+      CACHE_KEY,
+      JSON.stringify({
+        data,
+        timestamp: Date.now(),
+      })
+    );
+  };
+
+  const fetchStats = async (skipCache = false) => {
     try {
+      // Try cache first (unless explicitly skipped)
+      if (!skipCache) {
+        const cached = getCachedStats();
+        if (cached) {
+          setStats(cached.stats);
+          setRecentOrders(cached.recentOrders);
+          setLoading(false);
+          return;
+        }
+      }
+
       setLoading(true);
       const res = await fetch("http://localhost:5000/admin/dashboard-stats", {
         headers: { Authorization: `Bearer ${token}` },
@@ -45,6 +87,7 @@ const AdminDashboard = () => {
       if (res.ok) {
         setStats(data.stats);
         setRecentOrders(data.recentOrders);
+        setCachedStats(data);
       }
     } catch (err) {
       console.error("Failed to load dashboard stats", err);
@@ -71,7 +114,7 @@ const AdminDashboard = () => {
           <h1>Dashboard</h1>
           <p className="subtitle">Welcome back! Here's your store overview</p>
         </div>
-        <button className="refresh-btn" onClick={fetchStats}>
+        <button className="refresh-btn" onClick={() => fetchStats(true)}>
           Refresh
         </button>
       </div>

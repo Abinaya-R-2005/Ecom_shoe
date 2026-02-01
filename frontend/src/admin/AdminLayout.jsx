@@ -21,6 +21,7 @@ const AdminLayout = ({ children }) => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    localStorage.removeItem("admin_dashboard_cache");
     navigate("/", { replace: true });
   };
 
